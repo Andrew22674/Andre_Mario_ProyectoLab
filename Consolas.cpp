@@ -10,12 +10,12 @@ Consolas::Consolas(){
 
 }
 
-Consolas::Consolas(string marca, string nombre, string nSerie, int precio, string anioSalida){
+Consolas::Consolas(string marca, string nSerie, int precio, string anioSalida, string estado){
     this->marca=marca;
-    this->nombre=nombre;
     this->nSerie=nSerie;
     this->precio=precio;
     this->anioSalida=anioSalida;
+    this->estado=estado;
 }
 
 string Consolas::GetAnioSalida(){
@@ -42,20 +42,20 @@ void Consolas::SetNSerie(string nSerie) {
     this->nSerie = nSerie;
 }
 
-string Consolas::GetNombre(){
-    return nombre;
-}
-
-void Consolas::SetNombre(string nombre) {
-    this->nombre = nombre;
-}
-
 int Consolas::GetPrecio(){
     return precio;
 }
 
 void Consolas::SetPrecio(int precio) {
     this->precio = precio;
+}
+
+string Consolas::getEstado(){
+    return estado;
+}
+
+void Consolas::setEstado(string estado){
+    this->estado = estado;
 }
 
 Consolas::~Consolas(){
