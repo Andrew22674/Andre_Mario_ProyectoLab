@@ -1,5 +1,5 @@
 #include "UsuarioAdmin.h"
-
+#include <string>
 
 using namespace std;
 

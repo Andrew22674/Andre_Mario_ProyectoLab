@@ -1,11 +1,13 @@
 #pragma once
 
+#include <string>
+
 using namespace std;
 
 class UsuarioAdmin{
 public:
   UsuarioAdmin();
-  UsuarioAdmin(string,string);
+  UsuarioAdmin(string, string);
 
   string getNombre();
   void setNombre(string);

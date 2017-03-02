@@ -12,10 +12,10 @@
 
 using namespace std;
 
-//bool validarNumSerie(vector<Consola*>, int);
+bool validarNumSerie(vector<Consolas*>, int);
 
 int main(){
-  //vector<Consola*> consolas;
+  vector<Consolas*> consolas;
   int opcion = 0;
 
   //objetos de usuario para ingresar al sistema
