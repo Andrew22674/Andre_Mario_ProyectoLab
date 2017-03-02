@@ -28,3 +28,11 @@ string UsuarioVendedor::getHoraSalida(){
 void UsuarioVendedor::setHoraSalida(string hora_s){
   hora_salida = hora_s;
 }
+
+string UsuarioVendedor::getNombre(){
+  return nombre;
+}
+
+void UsuarioVendedor::setNombre(string name){
+  nombre = name;
+}
