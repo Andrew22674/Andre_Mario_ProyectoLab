@@ -194,10 +194,6 @@ int main(){
       time_t t = time(0);
       struct tm * fechahora = localtime( & t );
 
-      int dia = fechahora -> tm_mday;
-      int mes = fechahora -> tm_mon + 1;
-      int anio = fechahora -> tm_year + 1900;
-
       int hora = fechahora -> tm_hour;
       int min = fechahora -> tm_min;
       int seg = fechahora -> tm_sec;
@@ -205,7 +201,11 @@ int main(){
       string hora = "" + hora + ":" + min + ":" + seg;
 
       */
-      //UsuarioVendedor usuario_v = new UsuarioVendedor(nombre, hora);
+      /*
+      string nombre;
+      cout << "Ingrese nombre" << endl;
+      cin >> nombre;
+      UsuarioVendedor usuario_v = new UsuarioVendedor(nombre, hora);*/
 
       int opcionvendedor = 0;
 
