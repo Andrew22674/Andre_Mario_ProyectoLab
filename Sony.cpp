@@ -6,7 +6,7 @@ Sony::Sony(){
 
 }
 
-Sony::Sony(string marca, string nSerie, int precio, string anioSalida,string estado, string nombre) : Consolas(marca,nSerie,precio,anioSalida,estado){
+Sony::Sony(string marca, string nSerie, double precio, string anioSalida,string estado, string nombre) : Consolas(marca,nSerie,precio,anioSalida,estado){
     this->nombre=nombre;
 }
 

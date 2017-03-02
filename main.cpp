@@ -3,6 +3,13 @@
 #include <vector>
 #include <ctime>
 
+#include "Consolas.h"
+#include "Sony.h"
+#include "Microsoft.h"
+#include "Nintendo.h"
+
+#include
+
 using namespace std;
 
 //bool validarNumSerie(vector<Consola*>, int);
@@ -47,7 +54,7 @@ int main(){
 
         if (opcionadmin == 1) {
           cout << "1. Agregar usuario administrador" << endl
-          << "2. Agregar usuario vendedor" << endl;
+          /*<< "2. Agregar usuario vendedor" << endl*/;
 
           int opcionusuario;
           cin >> opcionusuario;
@@ -80,14 +87,30 @@ int main(){
             cin >> cantidadconsolas;
 
 
-            string releasedate, modelo, estado;
-            int numserie;
+            string marca, releasedate, modelo, estado;
+            int numserie, op_marca;
             double precio;
+
+            cout << "Marca" << endl
+            << "1. Microsoft" << endl
+            << "2. Sony" << endl
+            << "3. Nintendo" << endl;
+            cin >> op_marca;
+
+            if(op_marca == 1){
+              marca = "Microsoft";
+            }else if(op_marca == 2){
+              marca = "SONY";
+            }else{
+              marca = "Nintendo";
+            }
 
             cout << "Ingrese anio en que salio la consola" << endl;
             cin >> releasedate;
             cout << "Ingrese modelo" << endl;
             cin >> modelo;
+            cout << "Ingrese estado de la consola" << endl;
+            cin >> estado;
             cout << "Ingrese precio";
             cin >> precio;
             int contador = 1;
@@ -96,13 +119,21 @@ int main(){
               cin >> numserie;
 
               //validar si el numero de serie ya existe
-              /*while(validarNumSerie(consolas, numserie)){
+              while(validarNumSerie(consolas, numserie)){
                 cout << "Numero de serie ya existe" << endl
                 << "Ingrese otro numero de serie" << endl;
                 cin >> numserie;
-              }*/
-              //consolas.push_back(new Consola(releasedate, modelo, estado, numserie, precio));
-              contador++;
+              }
+
+              if(marca == "SONY"){
+                consolas.push_back(new Sony(marca, numserie, precio, releasedate, estado, modelo));
+              }else if(marca == "Microsoft"){
+                consolas.push_back(new Microsoft(marca, numserie, precio, releasedate, estado, modelo));
+              }else{
+                consolas.push_back(new Nintendo(marca, numserie, precio, releasedate, estado, modelo));
+
+              }
+            contador++;
             }
 
 
@@ -159,7 +190,22 @@ int main(){
         cout << "El usuario o contrasena es incorrecta" << endl;
       }
     }else if(opcion == 2){
+      /*
+      time_t t = time(0);
+      struct tm * fechahora = localtime( & t );
 
+      int dia = fechahora -> tm_mday;
+      int mes = fechahora -> tm_mon + 1;
+      int anio = fechahora -> tm_year + 1900;
+
+      int hora = fechahora -> tm_hour;
+      int min = fechahora -> tm_min;
+      int seg = fechahora -> tm_sec;
+
+      string hora = "" + hora + ":" + min + ":" + seg;
+
+      */
+      //UsuarioVendedor usuario_v = new UsuarioVendedor(nombre, hora);
 
       int opcionvendedor = 0;
 

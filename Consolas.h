@@ -10,7 +10,7 @@ class Consolas{
     private:
         string marca;
         string nSerie;
-        int precio;
+        double precio;
         string anioSalida;
         string estado;
 
@@ -31,7 +31,7 @@ public:
 
     void SetNSerie(string nSerie);
 
-    int GetPrecio();
+    double GetPrecio();
 
     void SetPrecio(int precio);
 
