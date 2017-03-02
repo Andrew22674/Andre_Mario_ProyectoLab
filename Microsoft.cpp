@@ -6,7 +6,7 @@ Microsoft::Microsoft(){
 
 }
 
-Microsoft::Microsoft(string nombre){
+Microsoft::Microsoft(string marca, string nSerie, int precio, string anioSalida,string estado, string nombre) : Consolas(marca,nSerie,precio,anioSalida,estado){
     this->nombre=nombre;
 }
 
