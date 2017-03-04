@@ -4,11 +4,12 @@
 #include <ctime>
 
 #include "Consolas.h"
+#include "Juegos.h"
 #include "Sony.h"
 #include "Microsoft.h"
 #include "Nintendo.h"
-
-#include
+#include "UsuarioVendedor.h"
+#include "UsuarioAdmin.h"
 
 using namespace std;
 
@@ -16,6 +17,7 @@ bool validarNumSerie(vector<Consolas*>, int);
 
 int main(){
   vector<Consolas*> consolas;
+  vector<UsuarioAdmin*> usuariosadmin;
   int opcion = 0;
 
   //objetos de usuario para ingresar al sistema
@@ -68,7 +70,7 @@ int main(){
             string n_contrasena;
             cin >> n_contrasena;
 
-            //vector<Usuario> usuarios.push_back(new Usuario(n_usuario, n_contrasena));
+            usuariosadmin.push_back(new Usuario(n_usuario, n_contrasena));
           }else if(opcionusuario == 2){
 
           }else{
@@ -175,14 +177,111 @@ int main(){
           }else{
             cout << "Opcion invalida";
           }
-        } else if (opcionadmin == 3) {
-          /* code */
-        } else if (opcionadmin == 4) {
-          /* code */
-        } else if (opcionadmin == 5) {
-          /* code */
-        } else if (opcionadmin == 6) {
-          /* code */
+        } else if (opcionadmin == 3) {//Modificar usuarios
+          cout << "Ingrese indice de usuario que desea modificar " << endl;
+          int index;
+          cin >> index;
+
+          UsuarioAdmin* ua = usuariosadmin.at(index);
+
+          cout << "Ingrese nombre de usuario" << endl;
+          string n_usuario;
+          cin >> n_usuario;
+
+          cout << "Ingrese contrasena de nuevo usuario" << endl;
+          string n_contrasena;
+          cin >> n_contrasena;
+
+          ua -> setNombre(n_usuario);
+          ua -> setContrasena(n_contrasena);
+
+
+        } else if (opcionadmin == 4) {//modificar consolas/videojuegos
+          cout << "1. Modificar consolas" << endl
+          << "2. Modificar videojuegos" << endl;
+
+          int mod_cons;
+          cin >> mod_cons;
+
+          if(mod_cons == 1){
+
+            cout << "Ingrese index de consola que desea modificar";
+            string marca, releasedate, modelo, estado;
+            int numserie, op_marca;
+            double precio;
+
+            cout << "Marca" << endl
+            << "1. Microsoft" << endl
+            << "2. Sony" << endl
+            << "3. Nintendo" << endl;
+            cin >> op_marca;
+
+            if(op_marca == 1){
+              marca = "Microsoft";
+            }else if(op_marca == 2){
+              marca = "SONY";
+            }else{
+              marca = "Nintendo";
+            }
+
+            cout << "Ingrese anio en que salio la consola" << endl;
+            cin >> releasedate;
+            cout << "Ingrese modelo" << endl;
+            cin >> modelo;
+            cout << "Ingrese estado de la consola" << endl;
+            cin >> estado;
+            cout << "Ingrese precio";
+            cin >> precio;
+            while(validarNumSerie(consolas, numserie)){
+              cout << "Numero de serie ya existe" << endl
+              << "Ingrese otro numero de serie" << endl;
+              cin >> numserie;
+            }
+
+              if(marca == "SONY"){
+                consolas.at(index) = new Sony(marca, numserie, precio, releasedate, estado, modelo);
+              }else if(marca == "Microsoft"){
+                consolas.at(index) = new Microsoft(marca, numserie, precio, releasedate, estado, modelo);
+              }else{
+                consolas.at(index) = new Nintendo(marca, numserie, precio, releasedate, estado, modelo);
+
+              }
+
+
+          }else if(cons == 2){
+
+          }else{
+            cout << "Opcion invalida";
+          }
+        } else if (opcionadmin == 5){//eliminar usuarios
+          cout << "Ingrese index de usuario que desea eliminar";
+          int index;
+          cin >> index;
+
+          usuariosadmin.erase(index);
+        } else if (opcionadmin == 6) {//eliminar consolas/videojuegos
+          cout << "1. Eliminar consola" << endl
+          "2. Eliminar videojuego" << endl;
+
+          int opc_cons;
+          cin >> opc_cons;
+
+
+          if(opc_cons == 1){
+              cout << "Ingrese indice de consola que desea eliminar" << endl;
+              int index;
+              cin >> index;
+
+              consolas.erase(index);
+          }else if(opc_cons == 2){
+            cout << "Ingrese indice de videojuego que desea eliminar" << endl;
+            int index;
+            cin >> index;
+
+            videojuegos.erase(index);
+          }else{
+            cout << "Opcion invalida" << endl;
+          }
         } else{
           cout << "Ingreso un numero invalido" << endl;
         }
@@ -201,11 +300,11 @@ int main(){
       string hora = "" + hora + ":" + min + ":" + seg;
 
       */
-      /*
+
       string nombre;
       cout << "Ingrese nombre" << endl;
       cin >> nombre;
-      UsuarioVendedor usuario_v = new UsuarioVendedor(nombre, hora);*/
+      UsuarioVendedor* usuario_v = new UsuarioVendedor(nombre, hora);
 
       int opcionvendedor = 0;
 
@@ -293,7 +392,7 @@ int main(){
             cout << "Opcion invalida" << endl;
           }
         }else if(opcionvendedor == 2){//Vender
-
+          usuario_v -> vender();
         }else if(opcionvendedor == 3){
           cout << endl;
         }else{

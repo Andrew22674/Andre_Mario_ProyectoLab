@@ -1,4 +1,4 @@
-
+#include <string>
 
 #ifndef JUEGOS_H
 #define JUEGOS_H
@@ -13,7 +13,7 @@ private:
     string estado;
     string nSerie;
     int precio;
-    
+
 public:
     Juegos::Juegos() {
     }
@@ -54,9 +54,8 @@ public:
     void Juegos::SetPrecio(int precio);
 
     ~Juegos();
-    
-    
+
+
 };
 
 #endif /* JUEGOS_H */
-
