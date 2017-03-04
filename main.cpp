@@ -4,7 +4,7 @@
 #include <ctime>
 
 #include "Consolas.h"
-#include "Juegos.h"
+//#include "Juegos.h"
 #include "Sony.h"
 #include "Microsoft.h"
 #include "Nintendo.h"
@@ -14,10 +14,12 @@
 using namespace std;
 
 bool validarNumSerie(vector<Consolas*>, int);
+bool numSerieJuegos(vector<Juegos*>, int);
 
 int main(){
   vector<Consolas*> consolas;
   vector<UsuarioAdmin*> usuariosadmin;
+  vector<Juegos*> videojuegos;
   int opcion = 0;
 
   //objetos de usuario para ingresar al sistema
@@ -70,7 +72,7 @@ int main(){
             string n_contrasena;
             cin >> n_contrasena;
 
-            usuariosadmin.push_back(new Usuario(n_usuario, n_contrasena));
+            usuariosadmin.push_back(new UsuarioAdmin(n_usuario, n_contrasena));
           }else if(opcionusuario == 2){
 
           }else{
@@ -163,16 +165,17 @@ int main(){
             cout << "Ingrese numero de serie";
             cin >> numserie;
 
-            /*
+
             while(numSerieJuegos(juegos, numserie)){
               cout << "Numero de serie ya existe, ingrese otro numero" << endl;
               cin >> numserie;
-              Videojuego* vj = new Videojuego(nombre,releasedate, consola, jugadores, genero, estado, numserie);
-              videojuegos.push_back(vj);
             }
 
+            Videojuego* vj = new Videojuego(nombre,releasedate, consola, jugadores, genero, estado, numserie);
+            videojuegos.push_back(vj);
 
-            */
+
+
 
           }else{
             cout << "Opcion invalida";
@@ -205,7 +208,10 @@ int main(){
 
           if(mod_cons == 1){
 
-            cout << "Ingrese index de consola que desea modificar";
+            cout << "Ingrese index de consola que desea modificar" << endl;
+            int index;
+            cin >> index;
+
             string marca, releasedate, modelo, estado;
             int numserie, op_marca;
             double precio;
@@ -258,9 +264,9 @@ int main(){
           int index;
           cin >> index;
 
-          usuariosadmin.erase(index);
+          usuariosadmin.erase(usuariosadmin.at(index));
         } else if (opcionadmin == 6) {//eliminar consolas/videojuegos
-          cout << "1. Eliminar consola" << endl
+          cout << "1. Eliminar consola" << endl <<
           "2. Eliminar videojuego" << endl;
 
           int opc_cons;
@@ -272,13 +278,13 @@ int main(){
               int index;
               cin >> index;
 
-              consolas.erase(index);
+              consolas.erase(consolas.at(index));
           }else if(opc_cons == 2){
             cout << "Ingrese indice de videojuego que desea eliminar" << endl;
             int index;
             cin >> index;
 
-            videojuegos.erase(index);
+            videojuegos.erase(videojuegos.at(index));
           }else{
             cout << "Opcion invalida" << endl;
           }
@@ -432,11 +438,11 @@ int main(){
 
 
 //validar si numero de serie ya existe
-/*bool validarNumSerie(vector<Consola*> consolas, int numserie){
+bool validarNumSerie(vector<Consolas*> consolas, int numserie){
   bool ya_existe = false;
 
   for(int i = 0; i < consolas.size(); i++){
-    if(numerie == consolas[i] -> getNumserie()){
+    if(numserie == consolas[i] -> getNumserie()){
       ya_existe = true;
       break;
     }else{
@@ -445,4 +451,20 @@ int main(){
   }
 
   return ya_existe;
-}*/
+}
+
+
+bool numSerieJuegos(vector<Juegos*> juegos, int numserie){
+  bool ya_existe = false;
+
+  for(int i = 0; i < juegos.size(); i++){
+    if(numserie == juegos[i] -> GetNumJug()){
+      ya_existe = true;
+      break;
+    }else{
+      ya_existe = false;
+    }
+  }
+
+  return ya_existe;
+}

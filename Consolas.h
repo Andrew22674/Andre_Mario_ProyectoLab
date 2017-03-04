@@ -7,39 +7,39 @@ using namespace std;
 #define CONSOLAS_H
 
 class Consolas{
-    private:
-        string marca;
-        string nSerie;
-        double precio;
-        string anioSalida;
-        string estado;
+private:
+  string marca;
+  string nSerie;
+  double precio;
+  string anioSalida;
+  string estado;
 
 public:
-    Consolas();
+  Consolas();
 
-    Consolas(string,string,int,string,string);
+  Consolas(string,string,double,string,string);
 
-    string GetAnioSalida();
+  string GetAnioSalida();
 
-    void SetAnioSalida(string anioSalida);
+  void SetAnioSalida(string anioSalida);
 
-    string GetMarca();
+  string GetMarca();
 
-    void SetMarca(string marca);
+  void SetMarca(string marca);
 
-    string GetNSerie();
+  string GetNSerie();
 
-    void SetNSerie(string nSerie);
+  void SetNSerie(string nSerie);
 
-    double GetPrecio();
+  double GetPrecio();
 
-    void SetPrecio(int precio);
+  void SetPrecio(double precio);
 
-    string getEstado();
+  string getEstado();
 
-    void setEstado(string);
+  void setEstado(string);
 
-    ~Consolas();
+  ~Consolas();
 };
 
 

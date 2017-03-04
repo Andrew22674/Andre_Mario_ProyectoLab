@@ -11,9 +11,9 @@ public:
   string getHoraSalida();
   string getNombre();
 
-  void setHoraEntrada();
-  void setHoraSalida();
-  void setNombre();
+  void setHoraEntrada(string);
+  void setHoraSalida(string);
+  void setNombre(string);
 
 private:
   string nombre;

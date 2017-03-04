@@ -46,7 +46,7 @@ double Consolas::GetPrecio(){
     return precio;
 }
 
-void Consolas::SetPrecio(int precio) {
+void Consolas::SetPrecio(double precio) {
     this->precio = precio;
 }
 
