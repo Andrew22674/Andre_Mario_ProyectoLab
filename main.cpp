@@ -528,7 +528,7 @@ bool validarNumSerie(vector<Consolas*> consolas, int numserie){
   bool ya_existe = false;
 
   for(int i = 0; i < consolas.size(); i++){
-    if(numserie == consolas[i] -> GetNSerie()){
+    if(numserie == consolas[i] -> GetNSerie()){//si el numero de serie es igual al numero de serie de la consola en indice "i" del vector consolas
       ya_existe = true;
       break;
     }else{
