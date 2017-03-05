@@ -1,5 +1,6 @@
 #pragma once
 #include "Consolas.h"
+#include <string>
 
 using namespace std;
 

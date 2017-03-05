@@ -1,5 +1,5 @@
 #include "UsuarioVendedor.h"
-
+#include <string>
 using namespace std;
 
 
@@ -7,10 +7,9 @@ UsuarioVendedor::UsuarioVendedor(){
 
 }
 
-UsuarioVendedor::UsuarioVendedor(string name, string hora_e, string hora_s){
+UsuarioVendedor::UsuarioVendedor(string name, string hora_e){
   nombre = name;
   hora_entrada = hora_e;
-  hora_salida = hora_s;
 }
 
 string UsuarioVendedor::getHoraEntrada(){
