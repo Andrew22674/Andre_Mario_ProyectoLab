@@ -14,13 +14,13 @@ private:
     int numJug;
     string genero;
     string estado;
-    string nSerie;
+    int nSerie;
     int precio;
 
 public:
     Juegos();
 
-    Juegos(string, int , string , int , string , string , string , int);
+    Juegos(string, int , string , int , string , string , int , double);
 
     int GetAnio();
 
@@ -38,9 +38,9 @@ public:
 
     void SetGenero(string);
 
-    string GetNSerie();
+    int GetNSerie();
 
-    void SetNSerie(string);
+    void SetNSerie(int);
 
     string GetNombre();
 
@@ -50,9 +50,9 @@ public:
 
     void SetNumJug(int);
 
-    int GetPrecio();
+    double GetPrecio();
 
-    void SetPrecio(int precio);
+    void SetPrecio(double precio);
 
     ~Juegos();
 

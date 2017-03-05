@@ -16,6 +16,8 @@ public:
   void setHoraSalida(string);
   void setNombre(string);
 
+  void vender();
+
 private:
   string nombre;
   string hora_entrada;

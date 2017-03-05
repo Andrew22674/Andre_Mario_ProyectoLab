@@ -35,3 +35,7 @@ string UsuarioVendedor::getNombre(){
 void UsuarioVendedor::setNombre(string name){
   nombre = name;
 }
+
+void UsuarioVendedor:: vender(){
+  
+}

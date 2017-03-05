@@ -7,7 +7,7 @@ using namespace std;
 Juegos::Juegos() {
 }
 
-Juegos::Juegos(string nombre, int anio, string consola, int numJug, string genero, string estado, string nSerie, int precio) {
+Juegos::Juegos(string nombre, int anio, string consola, int numJug, string genero, string estado, int nSerie, double precio) {
     this->nombre = nombre;
     this->anio = anio;
     this->consola = consola;
@@ -50,11 +50,11 @@ void Juegos::SetGenero(string genero) {
     this->genero = genero;
 }
 
-string Juegos::GetNSerie(){
+int Juegos::GetNSerie(){
     return nSerie;
 }
 
-void Juegos::SetNSerie(string nSerie) {
+void Juegos::SetNSerie(int nSerie) {
     this->nSerie = nSerie;
 }
 
@@ -74,11 +74,11 @@ void Juegos::SetNumJug(int numJug) {
     this->numJug = numJug;
 }
 
-int Juegos::GetPrecio() {
+double Juegos::GetPrecio() {
     return precio;
 }
 
-void Juegos::SetPrecio(int precio) {
+void Juegos::SetPrecio(double precio) {
     this->precio = precio;
 }
 

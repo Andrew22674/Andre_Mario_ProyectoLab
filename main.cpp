@@ -145,8 +145,8 @@ int main(){
 
 
           }else if(agregarconsola == 2){//agregar videojuegos
-            string nombre, releasedate, consola, genero, estado;
-            int jugadores, numserie;
+            string nombre, consola, genero, estado;
+            int jugadores, numserie, releasedate;
             double precio;
 
             cout << "Ingrese nombre del juego" << endl;
@@ -161,17 +161,19 @@ int main(){
             cin >> genero;
             cout << "Ingrese estado del videojuego" << endl;
             cin >> estado;
+            cout << "Ingrese precio" << endl;
+            cin >> precio;
 
             cout << "Ingrese numero de serie";
             cin >> numserie;
 
 
-            while(numSerieJuegos(juegos, numserie)){
+            while(numSerieJuegos(videojuegos, numserie)){
               cout << "Numero de serie ya existe, ingrese otro numero" << endl;
               cin >> numserie;
             }
 
-            Videojuego* vj = new Videojuego(nombre,releasedate, consola, jugadores, genero, estado, numserie);
+            Juegos* vj = new Juegos(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio);
             videojuegos.push_back(vj);
 
 
@@ -254,7 +256,47 @@ int main(){
               }
 
 
-          }else if(cons == 2){
+          }else if(mod_cons == 2){//modificar videojuegos
+            cout << "Ingrese indice de videojuego que desea modificar" << endl;
+            int index;
+            cin >> index;
+
+            Juegos* videojuego = videojuegos.at(index);
+
+            string nombre, consola, genero, estado;
+            int jugadores, numserie, releasedate;
+            double precio;
+
+            cout << "Ingrese nombre del juego" << endl;
+            cin >> nombre;
+            cout << "Ingrese anio en que salio el juego" << endl;
+            cin >> releasedate;
+            cout << "Ingrese para que consola esta disponible" << endl;
+            cin >> consola;
+            cout << "Ingrese maximo numero de jugadores" << endl;
+            cin >> jugadores;
+            cout << "Ingrese genero del videojuego" << endl;
+            cin >> genero;
+            cout << "Ingrese estado del videojuego" << endl;
+            cin >> estado;
+
+            cout << "Ingrese numero de serie";
+            cin >> numserie;
+
+
+            while(numSerieJuegos(videojuegos, numserie)){
+              cout << "Numero de serie ya existe, ingrese otro numero" << endl;
+              cin >> numserie;
+
+            }
+
+            videojuego -> SetNombre(nombre);
+            videojuego -> SetAnio(releasedate);
+            videojuego -> SetConsola(consola);
+            videojuego -> SetNumJug(jugadores);
+            videojuego -> SetGenero(genero);
+            videojuego -> SetEstado(estado);
+            videojuego -> SetNSerie(numserie);
 
           }else{
             cout << "Opcion invalida";
@@ -264,7 +306,7 @@ int main(){
           int index;
           cin >> index;
 
-          usuariosadmin.erase(usuariosadmin.at(index));
+          usuariosadmin.erase(usuariosadmin.begin() + index);
         } else if (opcionadmin == 6) {//eliminar consolas/videojuegos
           cout << "1. Eliminar consola" << endl <<
           "2. Eliminar videojuego" << endl;
@@ -278,13 +320,13 @@ int main(){
               int index;
               cin >> index;
 
-              consolas.erase(consolas.at(index));
+              consolas.erase(consolas.begin() + index);
           }else if(opc_cons == 2){
             cout << "Ingrese indice de videojuego que desea eliminar" << endl;
             int index;
             cin >> index;
 
-            videojuegos.erase(videojuegos.at(index));
+            videojuegos.erase(videojuegos.begin() + index);
           }else{
             cout << "Opcion invalida" << endl;
           }
@@ -295,7 +337,7 @@ int main(){
         cout << "El usuario o contrasena es incorrecta" << endl;
       }
     }else if(opcion == 2){
-      /*
+
       time_t t = time(0);
       struct tm * fechahora = localtime( & t );
 
@@ -303,14 +345,14 @@ int main(){
       int min = fechahora -> tm_min;
       int seg = fechahora -> tm_sec;
 
-      string hora = "" + hora + ":" + min + ":" + seg;
+      string hora_ent = "" + hora;// + ":" + min + ":" + seg;
 
-      */
+
 
       string nombre;
       cout << "Ingrese nombre" << endl;
       cin >> nombre;
-      UsuarioVendedor* usuario_v = new UsuarioVendedor(nombre, hora);
+      UsuarioVendedor* usuario_v = new UsuarioVendedor(nombre, hora_ent);
 
       int opcionvendedor = 0;
 
@@ -363,8 +405,8 @@ int main(){
 
 
           }else if(opcionconsola == 2){//agregar videojuegos
-            string nombre, releasedate, consola, genero, estado;
-            int jugadores, numserie;
+            string nombre, consola, genero, estado;
+            int jugadores, numserie, releasedate;
             double precio;
 
             cout << "Ingrese nombre del juego" << endl;
@@ -379,20 +421,22 @@ int main(){
             cin >> genero;
             cout << "Ingrese estado del videojuego" << endl;
             cin >> estado;
+            cout << "Ingrese precio" << endl;
+            cin >> precio;
 
             cout << "Ingrese numero de serie";
             cin >> numserie;
 
-            /*
-            while(numSerieJuegos(juegos, numserie)){
+
+            while(numSerieJuegos(videojuegos, numserie)){
               cout << "Numero de serie ya existe, ingrese otro numero" << endl;
               cin >> numserie;
-              Videojuego* vj = new Videojuego(nombre,releasedate, consola, jugadores, genero, estado, numserie);
-              videojuegos.push_back(vj);
+
             }
 
+            Juegos* vj = new Juegos(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio);
+            videojuegos.push_back(vj);
 
-            */
 
           }else{
             cout << "Opcion invalida" << endl;
@@ -442,7 +486,7 @@ bool validarNumSerie(vector<Consolas*> consolas, int numserie){
   bool ya_existe = false;
 
   for(int i = 0; i < consolas.size(); i++){
-    if(numserie == consolas[i] -> getNumserie()){
+    if(numserie == consolas[i] -> GetNSerie()){
       ya_existe = true;
       break;
     }else{
