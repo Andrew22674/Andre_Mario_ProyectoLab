@@ -32,7 +32,7 @@ int main(){
 
     cin >> opcion;
 
-    if(opcion == 1){
+    if(opcion == 1){//usuario administrador
       bool usuarioingreso = false;
       cout << "Ingrese nombre de usuario" << endl;
       string usuario;
@@ -336,7 +336,7 @@ int main(){
       }else{
         cout << "El usuario o contrasena es incorrecta" << endl;
       }
-    }else if(opcion == 2){
+    }else if(opcion == 2){//usuario vendedor
 
       time_t t = time(0);
       struct tm * fechahora = localtime( & t );

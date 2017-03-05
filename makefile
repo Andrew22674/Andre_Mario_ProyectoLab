@@ -1,5 +1,5 @@
-Proyecto:	Consolas.o Microsoft.o Sony.o Nintendo.o UsuarioAdmin.o UsuarioVendedor.o Juegos.o main.o
-	g++ Consolas.o Microsoft.o Sony.o Nintendo.o UsuarioAdmin.o UsuarioVendedor.o Juegos.o Proyecto
+Proyecto:	main.o Consolas.o Microsoft.o Sony.o Nintendo.o UsuarioAdmin.o UsuarioVendedor.o Juegos.o 
+	g++ main.o Consolas.o Microsoft.o Sony.o Nintendo.o UsuarioAdmin.o UsuarioVendedor.o Juegos.o -o Proyecto
 
 main.o:	main.cpp Consolas.h Microsoft.h Sony.h Nintendo.h UsuarioAdmin.h UsuarioVendedor.h Juegos.h
 	g++ -c main.cpp
