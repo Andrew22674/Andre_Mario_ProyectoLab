@@ -4,7 +4,7 @@
 #include <ctime>
 
 #include "Consolas.h"
-//#include "Juegos.h"
+#include "Juegos.h"
 #include "Sony.h"
 #include "Microsoft.h"
 #include "Nintendo.h"

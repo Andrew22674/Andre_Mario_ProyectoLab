@@ -9,7 +9,7 @@ using namespace std;
 class Consolas{
 private:
   string marca;
-  string nSerie;
+  int nSerie;
   double precio;
   string anioSalida;
   string estado;
@@ -17,7 +17,7 @@ private:
 public:
   Consolas();
 
-  Consolas(string,string,double,string,string);
+  Consolas(string,int,double,string,string);
 
   string GetAnioSalida();
 
@@ -27,9 +27,9 @@ public:
 
   void SetMarca(string marca);
 
-  string GetNSerie();
+  int GetNSerie();
 
-  void SetNSerie(string nSerie);
+  void SetNSerie(int nSerie);
 
   double GetPrecio();
 

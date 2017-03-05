@@ -10,7 +10,7 @@ Consolas::Consolas(){
 
 }
 
-Consolas::Consolas(string marca, string nSerie, double precio, string anioSalida, string estado){
+Consolas::Consolas(string marca, int nSerie, double precio, string anioSalida, string estado){
     this->marca=marca;
     this->nSerie=nSerie;
     this->precio=precio;
@@ -34,11 +34,11 @@ void Consolas::SetMarca(string marca) {
     this->marca = marca;
 }
 
-string Consolas::GetNSerie(){
+int Consolas::GetNSerie(){
     return nSerie;
 }
 
-void Consolas::SetNSerie(string nSerie) {
+void Consolas::SetNSerie(int nSerie) {
     this->nSerie = nSerie;
 }
 

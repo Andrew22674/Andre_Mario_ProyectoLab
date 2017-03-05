@@ -10,7 +10,7 @@ private:
 
 public:
     Nintendo();
-    Nintendo(string);
+    Nintendo(string,int,double,string,string,string);
     void setNombre(string nombre);
     string getNombre();
     ~Nintendo();

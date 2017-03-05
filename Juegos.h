@@ -1,5 +1,8 @@
 #include <string>
 
+using namespace std;
+
+
 #ifndef JUEGOS_H
 #define JUEGOS_H
 
@@ -15,43 +18,41 @@ private:
     int precio;
 
 public:
-    Juegos::Juegos() {
-    }
+    Juegos();
 
-    Juegos::Juegos(string, int , string , int , string , string , string , int);
-    }
+    Juegos(string, int , string , int , string , string , string , int);
 
-    int Juegos::GetAnio();
+    int GetAnio();
 
-    void Juegos::SetAnio(int);
+    void SetAnio(int);
 
-    string Juegos::GetConsola();
+    string GetConsola();
 
-    void Juegos::SetConsola(string);
+    void SetConsola(string);
 
-    string Juegos::GetEstado();
+    string GetEstado();
 
-    void Juegos::SetEstado(string);
+    void SetEstado(string);
 
-    string Juegos::GetGenero();
+    string GetGenero();
 
-    void Juegos::SetGenero(string);
+    void SetGenero(string);
 
-    string Juegos::GetNSerie();
+    string GetNSerie();
 
-    void Juegos::SetNSerie(string);
+    void SetNSerie(string);
 
-    string Juegos::GetNombre();
+    string GetNombre();
 
-    void Juegos::SetNombre(string);
+    void SetNombre(string);
 
-    int Juegos::GetNumJug();
+    int GetNumJug();
 
-    void Juegos::SetNumJug(int);
+    void SetNumJug(int);
 
-    int Juegos::GetPrecio();
+    int GetPrecio();
 
-    void Juegos::SetPrecio(int precio);
+    void SetPrecio(int precio);
 
     ~Juegos();
 

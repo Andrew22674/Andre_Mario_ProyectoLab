@@ -10,7 +10,7 @@ private:
 
 public:
     Sony();
-    Sony(string);
+    Sony(string,int,double,string,string,string);
     void setNombre(string nombre);
     string getNombre();
     ~Sony();
