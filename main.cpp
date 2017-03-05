@@ -17,10 +17,13 @@ bool validarNumSerie(vector<Consolas*>, int);
 bool numSerieJuegos(vector<Juegos*>, int);
 
 int main(){
+
   vector<Consolas*> consolas;
   vector<UsuarioAdmin*> usuariosadmin;
   vector<Juegos*> videojuegos;
   int opcion = 0;
+
+  usuariosadmin.push_back(new UsuarioAdmin("Andre", "andre123"));
 
   //objetos de usuario para ingresar al sistema
 
@@ -43,6 +46,12 @@ int main(){
 
       //usar un for para recorrer el vector y hallar el usuario y contrasena
       //si el ususario y contrasena son iguales, usuarioingreso = true
+
+      for(int i = 0; i < usuariosadmin.size(); i++){
+        if(usuario == usuariosadmin[i] -> getNombre() &&  contrasena == usuariosadmin[i] -> getContrasena()){
+          usuarioingreso = true;
+        }
+      }
 
       if(usuarioingreso == true /*y que sea instancia de usuario administrador*/ ){
         cout << "Menu usuario administrador" << endl
@@ -84,7 +93,7 @@ int main(){
           << "2. Agregar videojuego/s" << endl;
           cin >> agregarconsola;
 
-          if(agregarconsola == 1){
+          if(agregarconsola == 1){//agregar consola
 
             cout << "Cuantas consolas del mismo modelo quiere agregar?" << endl;
             int cantidadconsolas;
@@ -377,14 +386,30 @@ int main(){
             cin >> cantidadconsolas;
 
 
-            string releasedate, modelo, estado;
-            int numserie;
+            string marca, releasedate, modelo, estado;
+            int numserie, op_marca;
             double precio;
+
+            cout << "Marca" << endl
+            << "1. Microsoft" << endl
+            << "2. Sony" << endl
+            << "3. Nintendo" << endl;
+            cin >> op_marca;
+
+            if(op_marca == 1){
+              marca = "Microsoft";
+            }else if(op_marca == 2){
+              marca = "SONY";
+            }else{
+              marca = "Nintendo";
+            }
 
             cout << "Ingrese anio en que salio la consola" << endl;
             cin >> releasedate;
             cout << "Ingrese modelo" << endl;
             cin >> modelo;
+            cout << "Ingrese estado de la consola" << endl;
+            cin >> estado;
             cout << "Ingrese precio" << endl;
             cin >> precio;
             int contador = 1;
@@ -393,13 +418,21 @@ int main(){
               cin >> numserie;
 
               //validar si el numero de serie ya existe
-              /*while(validarNumSerie(consolas, numserie)){
+              while(validarNumSerie(consolas, numserie)){
                 cout << "Numero de serie ya existe" << endl
                 << "Ingrese otro numero de serie" << endl;
                 cin >> numserie;
-              }*/
-              //consolas.push_back(new Consola(releasedate, modelo, estado, numserie, precio));
-              contador++;
+              }
+
+              if(marca == "SONY"){
+                consolas.push_back(new Sony(marca, numserie, precio, releasedate, estado, modelo));
+              }else if(marca == "Microsoft"){
+                consolas.push_back(new Microsoft(marca, numserie, precio, releasedate, estado, modelo));
+              }else{
+                consolas.push_back(new Nintendo(marca, numserie, precio, releasedate, estado, modelo));
+
+              }
+            contador++;
             }
 
 
@@ -424,7 +457,7 @@ int main(){
             cout << "Ingrese precio" << endl;
             cin >> precio;
 
-            cout << "Ingrese numero de serie";
+            cout << "Ingrese numero de serie" << endl;
             cin >> numserie;
 
 
@@ -502,7 +535,7 @@ bool numSerieJuegos(vector<Juegos*> juegos, int numserie){
   bool ya_existe = false;
 
   for(int i = 0; i < juegos.size(); i++){
-    if(numserie == juegos[i] -> GetNumJug()){
+    if(numserie == juegos[i] -> GetNSerie()){
       ya_existe = true;
       break;
     }else{
