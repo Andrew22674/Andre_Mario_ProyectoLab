@@ -19,6 +19,29 @@ using namespace std;
 
 bool validarNumSerie(vector<Consolas*>, int);
 bool numSerieJuegos(vector<Juegos*>, int);
+void crearLog();
+
+string fmt(const std::string& fmt, ...) {
+    int size = 200;
+    string str;
+    va_list ap;
+    while (1) {
+        str.resize(size);
+        va_start(ap, fmt);
+        int n = vsnprintf((char*)str.c_str(), size, fmt.c_str(), ap);
+        va_end(ap);
+        if (n > -1 && n < size) {
+            str.resize(n);
+            return str;
+        }
+        if (n > -1)
+            size = n + 1;
+        else
+            size *= 2;
+    }
+    return str;
+}
+
 
 int main(){
 
@@ -489,21 +512,7 @@ int main(){
         }else if(opcionvendedor == 2){//Vender
           usuario_v -> vender();
 
-          ofstream outfile;
-          time_t currentTime = time(0);
-          tm* currentDate = localtime(&currentTime);
-          char filename[256] = {0};
-
-          strcpy(filename, "./log_ventas/");
-          strcat(filename, fmt("%d:%d:%d_%d-%d-%d.log",
-                 currentDate->tm_hour, currentDate->tm_min, currentDate->tm_sec,
-                 currentDate->tm_mday, currentDate->tm_mon+1,
-                 currentDate->tm_year+1900).c_str());
-
-          outfile.open(filename, std::ios::app);
-          outfile << "\t\tGameHub\nFecha: " << currentDate->tm_mday, currentDate->tm_mon+1,
-          currentDate->tm_year+1900).c_str()<< "\nHora" << ;
-          outfile.close();
+          crearLog();
 
         }else if(opcionvendedor == 3){
           cout << endl;
@@ -575,23 +584,22 @@ bool numSerieJuegos(vector<Juegos*> juegos, int numserie){
   return ya_existe;
 }
 
-string log_ventas(const std::string& log_ventas, ...) {
-    int size = 200;
-    string str;
-    va_list ap;
-    while (1) {
-        str.resize(size);
-        va_start(ap, log_ventas);
-        int n = vsnprintf((char*)str.c_str(), size, log_ventas.c_str(), ap);
-        va_end(ap);
-        if (n > -1 && n < size) {
-            str.resize(n);
-            return str;
-        }
-        if (n > -1)
-            size = n + 1;
-        else
-            size *= 2;
-    }
-    return str;
+
+void crearLog(){
+  ofstream outfile;
+  time_t currentTime = time(0);
+  tm* currentDate = localtime(&currentTime);
+  char filename[256] = {0};
+
+  strcpy(filename, "./fmt/");
+  strcat(filename, fmt("%d:%d:%d_%d-%d-%d.log",
+         currentDate->tm_hour, currentDate->tm_min, currentDate->tm_sec,
+         currentDate->tm_mday, currentDate->tm_mon+1,
+         currentDate->tm_year+1900).c_str());
+
+  outfile.open(filename, std::ios::app);
+  outfile << "\t\tGameHub\nFecha: " << currentDate->tm_mday, currentDate->tm_mon+1,
+  currentDate->tm_year+1900).c_str()<< "\nHora" << ;
+  outfile.close();
+
 }
