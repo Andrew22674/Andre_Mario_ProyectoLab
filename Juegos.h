@@ -15,7 +15,8 @@ private:
     string genero;
     string estado;
     int nSerie;
-    int precio;
+    double precio;
+    string compania;
 
 public:
     Juegos();
@@ -53,6 +54,10 @@ public:
     double GetPrecio();
 
     void SetPrecio(double precio);
+
+    string getCompania();
+
+    void setCompania(string);
 
     ~Juegos();
 
