@@ -34,7 +34,7 @@ time_t currentTime = time(0);
 tm* currentDate = localtime(&currentTime);
 char filename[256] = {0};
 
-strcpy(filename, "/home/fenix/Desktop/Andre_Mario_ProyectoLab/log_ventas/");
+strcpy(filename, "./log_ventas/");
 strcat(filename, fmt("%d:%d:%d_%d-%d-%d.log",
        currentDate->tm_hour, currentDate->tm_min, currentDate->tm_sec,
        currentDate->tm_mday, currentDate->tm_mon+1,
