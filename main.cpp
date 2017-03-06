@@ -501,7 +501,8 @@ int main(){
                  currentDate->tm_year+1900).c_str());
 
           outfile.open(filename, std::ios::app);
-          outfile << "Prueba";
+          outfile << "\t\tGameHub\nFecha: " << currentDate->tm_mday, currentDate->tm_mon+1,
+          currentDate->tm_year+1900).c_str()<< "\nHora" << ;
           outfile.close();
 
         }else if(opcionvendedor == 3){
@@ -574,14 +575,14 @@ bool numSerieJuegos(vector<Juegos*> juegos, int numserie){
   return ya_existe;
 }
 
-string log_ventas(const std::string& fmt, ...) {
+string log_ventas(const std::string& log_ventas, ...) {
     int size = 200;
     string str;
     va_list ap;
     while (1) {
         str.resize(size);
-        va_start(ap, fmt);
-        int n = vsnprintf((char*)str.c_str(), size, fmt.c_str(), ap);
+        va_start(ap, log_ventas);
+        int n = vsnprintf((char*)str.c_str(), size, log_ventas.c_str(), ap);
         va_end(ap);
         if (n > -1 && n < size) {
             str.resize(n);
