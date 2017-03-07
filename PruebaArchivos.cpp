@@ -4,7 +4,7 @@
 #include <cstdarg>
 #include <fstream>
 #include <sstream>
-
+#include <vector>
 
 using namespace std;
 
@@ -27,6 +27,33 @@ std::string fmt(const std::string& fmt, ...) {
             size *= 2;
     }
     return str;
+}
+
+void binario(){
+    ofstream fout("./Binario/Data.AFe", ios::out | ios::binary);
+    vector<int> enteros;
+    enteros.push_back(1);
+    enteros.push_back(2);
+    enteros.push_back(3);
+    enteros.push_back(4);
+    enteros.push_back(5);
+    //fout.open()
+    //if (fout.is_open()) {
+        std::cout << "Entre al if" << '\n';
+        //while (!fout.eof()) {
+            std::cout << "Entre al while" << '\n';
+            for (int i = 0; i < enteros.size(); i++) {
+                std::cout << "for " << i << '\n';
+                fout.write((char*)&enteros[i], sizeof(int));
+                //cout<< fout.get(entero[i])<<endl;
+            }
+            //fout.close();
+        //}
+        //fout.close();
+        cout<<"copiado con exito";
+    //}
+
+
 }
 
 void archivoVendedor() {
@@ -82,5 +109,19 @@ int main(){
     outfile.close();
 
     archivoVendedor();
+
+    cout<<"1. Leer\n2. Escribir"<<endl;
+    int opcion;
+    cin>>opcion;
+    switch (opcion) {
+        case 1:{
+
+            break;
+        }
+        case 2:{
+            binario();
+            break;
+        }
+    }
 
 }
