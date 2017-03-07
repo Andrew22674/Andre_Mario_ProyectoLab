@@ -6,6 +6,6 @@ private:
 
 public:
     Bugisoft ();
-    Bugisoft(string, int , string , int , string , string , int , double, string);
+    Bugisoft(string, int , string , int , string , string , int , double);
     ~Bugisoft ();
 };

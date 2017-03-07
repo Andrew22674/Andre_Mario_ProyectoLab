@@ -5,6 +5,7 @@
 #include <string.h>
 #include <cstdarg>
 #include <fstream>
+#include <sstream>
 
 
 #include "Consolas.h"
@@ -14,6 +15,8 @@
 #include "Nintendo.h"
 #include "UsuarioVendedor.h"
 #include "UsuarioAdmin.h"
+#include "Venta.h"
+
 
 using namespace std;
 
@@ -256,7 +259,7 @@ int main(){
                   cout << "Numero de serie ya existe, ingrese otro numero" << endl;
                   cin >> numserie;
                 }
-
+                /*
                 if(compania == "Microsoft"){
                   videojuegos.push_back(new Juegos_Microsoft(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio, compania));
                 }else if(compania == "Sony"){
@@ -276,7 +279,7 @@ int main(){
                 }else if(compania == "Ubisoft"){
                   videojuegos.push_back(new Bugisoft(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio, compania));
                 }
-
+                */
 
 
 
@@ -701,22 +704,22 @@ void crearLog(Venta* venta){
          currentDate->tm_mday, currentDate->tm_mon+1,
          currentDate->tm_year+1900).c_str());
 
-  string temp, temp2;
+  string fecha, hora;
   fecha = fmt("%d-%d-%d",currentDate->tm_mday, currentDate->tm_mon+1,
   currentDate->tm_year+1900).c_str();
   hora = fmt("%d:%d:%d",currentDate->tm_hour, currentDate->tm_min, currentDate->tm_sec).c_str();
   stringstream  ss;
   double impuesto = venta -> getSubtotal() * .15;
   double total = venta -> getSubtotal() + impuesto;
-  ss << "\t\tGameHub\n\nFecha: " << fecha << "\nHora: " << hora << "\nVendedor: " << venta -> getUsuario() << "\nCliente: " << venta -> getNombreCliente() <<"\nCantidad de Articulos: "<< venta -> getCantidadArticulos() << "\n";
-  /*QUITAR COMLLIASRecorrer un for que tenga los articulos vendidos y mostrar su precio y su nombre*/
+  ss << "\t\tGameHub\n\nFecha: " << fecha << "\nHora: " << hora << "\nVendedor: " << venta -> getUsuario() << "\nCliente: " << venta -> getNombreCliente() <<"\n\nCantidad de Articulos: "<< venta -> getCantidadArticulos() << "\n\n";
+
 
   for(int i = 0; i < venta -> getSizeConsolas(); i++){
-    ss << venta(getConsola(i)) << "\n";
+    ss << venta -> getConsola(i) << "\n";
   }
 
   for(int i = 0; i < venta -> getSizeJuegos(); i++){
-    ss << venta(getJuego(i)) << "\n";
+    ss << venta -> getJuego(i) << "\n";
   }
 
   ss << "\nSubTotal: "<< venta -> getSubtotal() << "\nImpuesto: " << impuesto << "\nTotal: "<< total;

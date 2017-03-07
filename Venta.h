@@ -1,6 +1,10 @@
+#pragma once
+
 #include <string>
 #include <vector>
-#pragma once
+#include "Consolas.h"
+#include "Juegos.h"
+
 using namespace std;
 
 class Venta{
@@ -31,4 +35,4 @@ private:
   double subtotal;
 
 
-}
+};

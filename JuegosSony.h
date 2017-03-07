@@ -6,6 +6,6 @@ private:
 
 public:
     JuegosSony ();
-    JuegosSony(string, int , string , int , string , string , int , double, string);
+    JuegosSony(string, int , string , int , string , string , int , double);
     ~JuegosSony ();
 };

@@ -16,12 +16,12 @@ private:
     string estado;
     int nSerie;
     double precio;
-    string compania;
+
 
 public:
     Juegos();
 
-    Juegos(string, int , string , int , string , string , int , double, string);
+    Juegos(string, int , string , int , string , string , int , double);
 
     int GetAnio();
 
@@ -54,10 +54,6 @@ public:
     double GetPrecio();
 
     void SetPrecio(double precio);
-
-    string getCompania();
-
-    void setCompania(string);
 
     ~Juegos();
 

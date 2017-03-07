@@ -6,7 +6,7 @@ SquareEnix::SquareEnix(){
 
 }
 
-SquareEnix::SquareEnix(string nombre, int anio, string consola, int numJug, string genero, string estado, int nSerie, double precio, string compania) : Juegos(string,int,string,int,string,string,int,double,string) {
+SquareEnix::SquareEnix(string nombre, int anio, string consola, int numJug, string genero, string estado, int nSerie, double precio) : Juegos(string,int,string,int,string,string,int,double) {
     this->nombre = nombre;
     this->anio = anio;
     this->consola = consola;
@@ -15,7 +15,7 @@ SquareEnix::SquareEnix(string nombre, int anio, string consola, int numJug, stri
     this->estado = estado;
     this->nSerie = nSerie;
     this->precio = precio;
-    this->compania = compania;
+    
 }
 
 SquareEnix::~SquareEnix(){

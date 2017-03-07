@@ -6,6 +6,6 @@ private:
 
 public:
     SquareEnix ();
-    SquareEnix(string, int , string , int , string , string , int , double, string);
+    SquareEnix(string, int , string , int , string , string , int , double);
     ~SquareEnix ();
 };
