@@ -24,10 +24,13 @@ public:
   int getSizeJuegos();//retorna el tamano del vector de juegos
   int getSizeConsolas();//retorna el tamano del vector de consolas
 
+
   void setNombre(string);
   void setHora(string);
   void setUsuario(string);
   void setSubtotal(double);
+  void setConsolas(vector<Consolas*>);
+  void setJuegos(vector<Juegos*>);
 private:
   string nombreCliente;
   vector<Consolas*> consolas;

@@ -34,6 +34,14 @@ string Venta::GetConsola(int index){
     Consolas* consola = consolas.at(index);
 
     ss << ((Microsoft*)consola) -> getNombre()  << " Precio: " << consolas.at(index) -> GetPrecio();
+  }else if ( consolas.at(index) -> GetMarca() == "Sony"){
+    Consolas* consola = consolas.at(index);
+
+    ss << ((Sony*)consola) -> getNombre()  << " Precio: " << consolas.at(index) -> GetPrecio();
+  }else if ( consolas.at(index) -> GetMarca() == "Nintendo"){
+    Consolas* consola = consolas.at(index);
+
+    ss << ((Nintendo*)consola) -> getNombre()  << " Precio: " << consolas.at(index) -> GetPrecio();
   }
 
   return ss.str();
@@ -83,4 +91,13 @@ int Venta::getSizeConsolas(){
 
 int Venta::getSizeJuegos(){
   return juegos.size();
+}
+
+
+void Venta::setConsolas(vector<Consolas*> consolas){
+  this->consolas = consolas;
+}
+
+void Venta::setJuegos(vector<Juegos*> juegos){
+  this->juegos = juegos;
 }

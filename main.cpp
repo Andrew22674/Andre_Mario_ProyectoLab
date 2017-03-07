@@ -639,7 +639,15 @@ int main(){
           }else{
             cout << "Ingreso una opcion invalida";
           }
+
+          vector<Consolas*> cons;
+          vector<Juegos> jueg;
+
+          cons.push_back(new Sony("Sony", 123, 250.00, "2006", "Nuevo", "PS3"));
+          cons.push_back(new Sony("Microsoft", 124, 230.00, "2010", "Nuevo", "Xbox 360 Slim"));
+          cons.push_back(new Nintendo("Nintendo", 125, 300.00, "2010", "Nuevo", "Switch"));
           Venta* venta = new Venta("Cliente", "10:00" , "Andre");
+          venta -> setConsolas(cons);
           crearLog(venta);
 
         }else if(opcionvendedor == 3){
