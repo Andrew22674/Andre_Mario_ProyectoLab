@@ -445,7 +445,6 @@ int main(){
                 videojuego -> SetGenero(genero);
                 videojuego -> SetEstado(estado);
                 videojuego -> SetNSerie(numserie);
-                videojuego -> setCompania(compania);
               }else{
                 cout << "Opcion invalida";
               }

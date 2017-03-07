@@ -1,16 +1,17 @@
 #include "Venta.h"
+#include <sstream>
+#include <string>
+
 
 Venta::Venta(){
   subtotal = 0.0;
 }
 
-Venta::Venta(string cliente, vector<Consolas> consoles, vector<Juegos> games, string hour, string user, double subt){
+Venta::Venta(string cliente, string hour, string user){
   nombreCliente = cliente;
-  consolas = consoles;
-  juegos = games;
   hora = hour;
   usuario = user;
-  subtotal = subt;
+  subtotal = 0.0;
 
 }
 
@@ -31,14 +32,16 @@ string Venta::GetConsola(int index){
 }
 
 string Venta::getJuego(int index){
-  return juegos.at(i) -> getNombre + "Precio: " + juegos.at(i) -> GetPrecio();
+  stringstream ss;
+  ss << juegos.at(index) -> GetNombre() << "Precio: " << juegos.at(index) -> GetPrecio();
+  return ss.str();
 }
 
-double getSubtotal(){
+double Venta::getSubtotal(){
     double subt = 0.0;
 
-    for(int i = 0; i < Consolas.size(); i++){
-      subt += Consolas[i] -> GetPrecio();
+    for(int i = 0; i < consolas.size(); i++){
+      subt += consolas[i] -> GetPrecio();
     }
 
     for(int i = 0; i < juegos.size(); i++){
@@ -58,18 +61,18 @@ void Venta::setUsuario(string user){
   usuario = user;
 }
 
-double setSubtotal(double subt){
+void Venta::setSubtotal(double subt){
   subtotal = subt;
 }
 
-int getCantidadArticulos(){
-  return Consolas.size() + juegos.size();
+int Venta::getCantidadArticulos(){
+  return (consolas.size() + juegos.size());
 }
 
-int getSizeConsolas(){
-  return Consolas.size();
+int Venta::getSizeConsolas(){
+  return consolas.size();
 }
 
-int getSizeJuegos(){
+int Venta::getSizeJuegos(){
   return juegos.size();
 }

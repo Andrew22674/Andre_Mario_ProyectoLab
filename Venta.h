@@ -9,7 +9,7 @@ using namespace std;
 
 class Venta{
 public:
-  Venta(string, vector<Consolas>, vector<Juegos>, string, string, double);
+  Venta(string, string, string);
   Venta();
 
   string getNombreCliente();
@@ -28,8 +28,8 @@ public:
   void setSubtotal(double);
 private:
   string nombreCliente;
-  vector<Consolas> Consolas;
-  vector<Juegos> juegos;
+  vector<Consolas*> consolas;
+  vector<Juegos*> juegos;
   string hora;
   string usuario;
   double subtotal;
