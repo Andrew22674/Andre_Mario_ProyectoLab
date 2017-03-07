@@ -617,38 +617,88 @@ int main(){
           }
         }else if(opcionvendedor == 2){//Vender
           usuario_v -> vender();
+          cout << "Ingrese nombre de cliente" << endl;
+          string nombre_cliente;
+          cin >> nombre_cliente;
 
-          cout << "1. Vender consolas\n2. Vender video juegos" << endl;
-          int opc_vender;
-          cin >> opc_vender;
+          time_t t = time(0);
+          struct tm * fechahora = localtime( & t );
 
-          if(opc_vender == 1){
-            cout << "Que marca de consola desea vender?" << endl;
-            cout << "1. Microsoft" << endl
-            << "2. Sony" << endl << endl
-            << "3. Nintendo" << endl;
+          int hora = fechahora -> tm_hour;
+          int min = fechahora -> tm_min;
 
-            int opc_marca;
-            cin >> opc_marca;
+          stringstream ss;
+          ss << hora << ":" << min;
 
-            if(opc_marca == 1){
-              //recorrer un for y solo mostrar las consolas de Microsoft o hacerlo de otra manera
+          string hora_actual = ss.str();
+          Venta* venta = new Venta(nombre_cliente, hora_actual , usuario_v -> getNombre());
+          string add_cons_o_video = "s";
+
+          while(add_cons_o_video == "s" || add_cons_o_video == "S"){
+            cout << "1. Vender consolas\n2. Vender video juegos" << endl;
+            int opc_vender;
+            cin >> opc_vender;
+
+
+            if(opc_vender == 1){
+
+              string seguir = "s";
+
+              while(seguir == "s" || seguir == "S"){
+                  cout << "Que marca de consola desea vender?" << endl;
+                  cout << "1. Microsoft" << endl
+                  << "2. Sony" << endl
+                  << "3. Nintendo" << endl;
+
+                  int opc_marca;
+                  cin >> opc_marca;
+
+                  if(opc_marca == 1){
+                    //recorrer un for y solo mostrar las consolas de Microsoft o hacerlo de otra manera
+                    for(int i =0; i< consolas.size(); i++){
+                      if(consolas[i] -> GetMarca() == "Microsoft"){
+                        cout << i << " " << ((Microsoft*)consolas[i]) -> getNombre() << endl;
+                      }
+                    }
+
+                  }else if(opc_vender == 2){
+                    for(int i =0; i< consolas.size(); i++){
+                      if(consolas[i] -> GetMarca() == "Sony"){
+                        cout << i << " " << ((Sony*)consolas[i]) -> getNombre() << endl;
+                      }
+
+                    }
+                  }else if(opc_vender == 3){
+                    for(int i =0; i< consolas.size(); i++){
+                      if(consolas[i] -> GetMarca() == "Nintendo"){
+                        cout << i << " " << ((Nintendo*)consolas[i]) -> getNombre() << endl;
+                      }
+                    }
+                  }else{
+                    cout << "Ingreso una opcion invalida";
+                  }
+
+                cout << "Ingrese indice de consola que desea agregar al carrito" << endl;
+                int index;
+                cin >> index;
+
+
+                //cons.push_back(consolas[index]);
+                venta -> setConsola(consolas[index]);
+                crearLog(venta);
+
+                cout << "Desea seguir agregando consolas al carrito[s/n]" << endl;
+                cin >> seguir;
+
+              }
+
             }
-          }else if(opc_vender == 2){
 
-          }else{
-            cout << "Ingreso una opcion invalida";
+            cout << "Desea seguir agregando consolas o videojuegos al carrito[s/n]" << endl;
+            cin >> add_cons_o_video;
+
           }
 
-          vector<Consolas*> cons;
-          vector<Juegos> jueg;
-
-          cons.push_back(new Sony("Sony", 123, 250.00, "2006", "Nuevo", "PS3"));
-          cons.push_back(new Sony("Microsoft", 124, 230.00, "2010", "Nuevo", "Xbox 360 Slim"));
-          cons.push_back(new Nintendo("Nintendo", 125, 300.00, "2010", "Nuevo", "Switch"));
-          Venta* venta = new Venta("Cliente", "10:00" , "Andre");
-          venta -> setConsolas(cons);
-          crearLog(venta);
 
         }else if(opcionvendedor == 3){
           cout << endl;

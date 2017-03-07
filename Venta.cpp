@@ -94,10 +94,18 @@ int Venta::getSizeJuegos(){
 }
 
 
-void Venta::setConsolas(vector<Consolas*> consolas){
+/*void Venta::setConsolas(vector<Consolas*> consolas){
   this->consolas = consolas;
 }
 
 void Venta::setJuegos(vector<Juegos*> juegos){
   this->juegos = juegos;
+}*/
+
+void Venta::setJuego(Juegos* juego){
+  juegos.push_back(juego);
+}
+
+void Venta::setConsola(Consolas* consola){
+  consolas.push_back(consola);
 }

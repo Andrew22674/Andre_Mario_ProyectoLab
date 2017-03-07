@@ -29,8 +29,10 @@ public:
   void setHora(string);
   void setUsuario(string);
   void setSubtotal(double);
-  void setConsolas(vector<Consolas*>);
-  void setJuegos(vector<Juegos*>);
+  void setConsola(Consolas*);//agrega una consola al vector de consolas
+  void setJuego(Juegos*);//agrega un juego al vector de juegos
+  //void setConsolas(vector<Consolas*>);
+  //void setJuegos(vector<Juegos*>);
 private:
   string nombreCliente;
   vector<Consolas*> consolas;
