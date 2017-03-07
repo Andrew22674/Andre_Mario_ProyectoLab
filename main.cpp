@@ -655,20 +655,23 @@ int main(){
 
                   if(opc_marca == 1){
                     //recorrer un for y solo mostrar las consolas de Microsoft o hacerlo de otra manera
+                    cout << "Consolas de Microsoft: " << endl;
                     for(int i =0; i< consolas.size(); i++){
                       if(consolas[i] -> GetMarca() == "Microsoft"){
                         cout << i << " " << ((Microsoft*)consolas[i]) -> getNombre() << endl;
                       }
                     }
 
-                  }else if(opc_vender == 2){
+                  }else if(opc_marca == 2){
+                    cout << "Consolas de Sony: " << endl;
                     for(int i =0; i< consolas.size(); i++){
-                      if(consolas[i] -> GetMarca() == "Sony"){
+                      if(consolas[i] -> GetMarca() == "SONY"){
                         cout << i << " " << ((Sony*)consolas[i]) -> getNombre() << endl;
                       }
 
                     }
-                  }else if(opc_vender == 3){
+                  }else if(opc_marca == 3){
+                    cout << "Consolas de Nintendo: " << endl;
                     for(int i =0; i< consolas.size(); i++){
                       if(consolas[i] -> GetMarca() == "Nintendo"){
                         cout << i << " " << ((Nintendo*)consolas[i]) -> getNombre() << endl;
@@ -685,7 +688,7 @@ int main(){
 
                 //cons.push_back(consolas[index]);
                 venta -> setConsola(consolas[index]);
-                crearLog(venta);
+
 
                 cout << "Desea seguir agregando consolas al carrito[s/n]" << endl;
                 cin >> seguir;
@@ -698,6 +701,7 @@ int main(){
             cin >> add_cons_o_video;
 
           }
+          crearLog(venta);
 
 
         }else if(opcionvendedor == 3){

@@ -34,9 +34,9 @@ string Venta::GetConsola(int index){
     Consolas* consola = consolas.at(index);
 
     ss << ((Microsoft*)consola) -> getNombre()  << " Precio: " << consolas.at(index) -> GetPrecio();
-  }else if ( consolas.at(index) -> GetMarca() == "Sony"){
+  }else if ( consolas.at(index) -> GetMarca() == "SONY"){
     Consolas* consola = consolas.at(index);
-
+    
     ss << ((Sony*)consola) -> getNombre()  << " Precio: " << consolas.at(index) -> GetPrecio();
   }else if ( consolas.at(index) -> GetMarca() == "Nintendo"){
     Consolas* consola = consolas.at(index);
