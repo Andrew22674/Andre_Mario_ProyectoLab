@@ -15,6 +15,7 @@ Konami::Konami(string nombre, int anio, string consola, int numJug, string gener
     this->estado = estado;
     this->nSerie = nSerie;
     this->precio = precio;
+    
 }
 
 Konami::~Konami(){

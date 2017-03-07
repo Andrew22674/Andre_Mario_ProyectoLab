@@ -15,6 +15,7 @@ Sega::Sega(string nombre, int anio, string consola, int numJug, string genero, s
     this->estado = estado;
     this->nSerie = nSerie;
     this->precio = precio;
+    
 }
 
 Sega::~Sega(){

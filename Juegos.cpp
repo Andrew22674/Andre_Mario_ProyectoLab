@@ -7,7 +7,7 @@ using namespace std;
 Juegos::Juegos() {
 }
 
-Juegos::Juegos(string nombre, int anio, string consola, int numJug, string genero, string estado, int nSerie, double precio, string compania) {
+Juegos::Juegos(string nombre, int anio, string consola, int numJug, string genero, string estado, int nSerie, double precio) {
     this->nombre = nombre;
     this->anio = anio;
     this->consola = consola;
@@ -16,7 +16,7 @@ Juegos::Juegos(string nombre, int anio, string consola, int numJug, string gener
     this->estado = estado;
     this->nSerie = nSerie;
     this->precio = precio;
-    this->compania = compania;
+
 }
 
 int Juegos::GetAnio(){
@@ -85,12 +85,4 @@ void Juegos::SetPrecio(double precio) {
 
 Juegos::~Juegos(){
 	cout<<"Destruyendo objeto Juegos"<<endl;
-}
-
-string Juegos::getCompania(){
-  return compania;
-}
-
-void Juegos::setCompania(string compania){
-  this->compania = compania;
 }

@@ -15,6 +15,7 @@ JuegosNintendo::JuegosNintendo(string nombre, int anio, string consola, int numJ
     this->estado = estado;
     this->nSerie = nSerie;
     this->precio = precio;
+
 }
 
 JuegosNintendo::~JuegosNintendo(){

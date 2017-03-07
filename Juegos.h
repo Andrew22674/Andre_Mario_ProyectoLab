@@ -16,7 +16,7 @@ private:
     string estado;
     int nSerie;
     double precio;
-    string compania;
+
 
 public:
     Juegos();
@@ -54,10 +54,6 @@ public:
     double GetPrecio();
 
     void SetPrecio(double precio);
-
-    string getCompania();
-
-    void setCompania(string);
 
     ~Juegos();
 

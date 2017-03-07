@@ -15,6 +15,7 @@ Bugisoft::Bugisoft(string nombre, int anio, string consola, int numJug, string g
     this->estado = estado;
     this->nSerie = nSerie;
     this->precio = precio;
+    
 }
 
 Bugisoft::~Bugisoft(){

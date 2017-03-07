@@ -15,6 +15,7 @@ SquareEnix::SquareEnix(string nombre, int anio, string consola, int numJug, stri
     this->estado = estado;
     this->nSerie = nSerie;
     this->precio = precio;
+    
 }
 
 SquareEnix::~SquareEnix(){
