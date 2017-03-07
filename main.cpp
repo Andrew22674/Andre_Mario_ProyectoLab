@@ -22,7 +22,7 @@ using namespace std;
 
 bool validarNumSerie(vector<Consolas*>, int);
 bool numSerieJuegos(vector<Juegos*>, int);
-void crearLog();
+void crearLog(Venta*);
 
 string fmt(const std::string& fmt, ...) {
     int size = 200;
@@ -618,7 +618,29 @@ int main(){
         }else if(opcionvendedor == 2){//Vender
           usuario_v -> vender();
 
-          crearLog();
+          cout << "1. Vender consolas\n2. Vender video juegos" << endl;
+          int opc_vender;
+          cin >> opc_vender;
+
+          if(opc_vender == 1){
+            cout << "Que marca de consola desea vender?" << endl;
+            cout << "1. Microsoft" << endl
+            << "2. Sony" << endl << endl
+            << "3. Nintendo" << endl;
+
+            int opc_marca;
+            cin >> opc_marca;
+
+            if(opc_marca == 1){
+              //recorrer un for y solo mostrar las consolas de Microsoft o hacerlo de otra manera
+            }
+          }else if(opc_vender == 2){
+
+          }else{
+            cout << "Ingreso una opcion invalida";
+          }
+          Venta* venta = new Venta("Cliente", "10:00" , "Andre");
+          crearLog(venta);
 
         }else if(opcionvendedor == 3){
           cout << endl;
@@ -714,7 +736,7 @@ void crearLog(Venta* venta){
 
 
   for(int i = 0; i < venta -> getSizeConsolas(); i++){
-    ss << venta -> getConsola(i) << "\n";
+    ss << venta -> GetConsola(i) << "\n";
   }
 
   for(int i = 0; i < venta -> getSizeJuegos(); i++){

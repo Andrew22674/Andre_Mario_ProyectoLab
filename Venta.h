@@ -1,5 +1,7 @@
 #pragma once
-
+#include "Microsoft.h"
+#include "Nintendo.h"
+#include "Sony.h"
 #include <string>
 #include <vector>
 #include "Consolas.h"
@@ -15,7 +17,7 @@ public:
   string getNombreCliente();
   string getHora();
   string getUsuario();
-  string getConsola(int);//retorna una consola en index i del vector de consolas
+  string GetConsola(int);//retorna una consola en index i del vector de consolas
   string getJuego(int); // retorna un juego en index i del vector de juegos
   double getSubtotal();// retorna el precio de consolas y juegos
   int getCantidadArticulos();//retorna la cantidad de consolas y juegos

@@ -28,7 +28,15 @@ string Venta::getUsuario(){
 }
 
 string Venta::GetConsola(int index){
-  return "" + consolas.at(i) -> getModelo + "" + consolas.at(i) -> getNombre() + " Precio: " + consolas.at(i) -> GetPrecio();
+  stringstream ss;
+  // ((B)a).foo();
+  if ( consolas.at(index) -> GetMarca() == "Microsoft"){
+    Consolas* consola = consolas.at(index);
+
+    ss << ((Microsoft*)consola) -> getNombre()  << " Precio: " << consolas.at(index) -> GetPrecio();
+  }
+
+  return ss.str();
 }
 
 string Venta::getJuego(int index){
