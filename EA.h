@@ -6,6 +6,6 @@ private:
 
 public:
     EA ();
-    EA(string, int , string , int , string , string , int , double);
+    EA(string, int , string , int , string , string , int , double, string);
     ~EA ();
 };

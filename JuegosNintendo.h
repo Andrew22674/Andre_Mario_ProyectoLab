@@ -6,6 +6,6 @@ private:
 
 public:
     JuegosNintendo ();
-    JuegosNintendo(string, int , string , int , string , string , int , double);
+    JuegosNintendo(string, int , string , int , string , string , int , double, string);
     ~JuegosNintendo ();
 };

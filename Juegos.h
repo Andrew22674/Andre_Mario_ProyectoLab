@@ -21,7 +21,7 @@ private:
 public:
     Juegos();
 
-    Juegos(string, int , string , int , string , string , int , double);
+    Juegos(string, int , string , int , string , string , int , double, string);
 
     int GetAnio();
 

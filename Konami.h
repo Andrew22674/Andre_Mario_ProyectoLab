@@ -6,6 +6,6 @@ private:
 
 public:
     Konami ();
-    Konami(string, int , string , int , string , string , int , double);
+    Konami(string, int , string , int , string , string , int , double, string);
     ~Konami ();
 };

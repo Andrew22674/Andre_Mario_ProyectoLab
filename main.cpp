@@ -205,6 +205,49 @@ int main(){
                 cout << "Ingrese precio" << endl;
                 cin >> precio;
 
+
+                cout << "Ingrese compania de videojuego" << endl;
+
+                cout << "1. Microsoft" << endl <<
+                "2. Sony" << endl <<
+                "3. Nintendo" << endl <<
+                "4. Bandai" << endl <<
+                "5. Konami" << endl <<
+                "6. Square Enix" << endl <<
+                "7. EA" << endl <<
+                "8. SEGA" << endl <<
+                "9. Ubisoft" << endl;
+
+                int opc_compania;
+                cin >> opc_compania;
+
+                while(opc_compania < 0 || opc_compania > 9){
+                  cout << "Numero invalido, ingrese otro numero" << endl;
+                  cin >> opc_compania;
+
+                }
+                string compania;
+                if(opc_compania == 1){
+                  compania = "Microsoft";
+                }else if(opc_compania == 2){
+                  compania = "Sony";
+                }else if(opc_compania == 3){
+                  compania = "Nintendo";
+                }else if(opc_compania == 4){
+                  compania = "Bandai";
+                }else if(opc_compania == 5){
+                  compania = "Konami";
+                }else if(opc_compania == 6){
+                  compania = "Square Enix";
+                }else if(opc_compania == 7){
+                  compania = "EA";
+                }else if(opc_compania == 8){
+                  compania = "SEGA";
+                }else if(opc_compania == 9){
+                  compania = "Ubisoft";
+                }
+
+
                 cout << "Ingrese numero de serie";
                 cin >> numserie;
 
@@ -214,8 +257,26 @@ int main(){
                   cin >> numserie;
                 }
 
-                Juegos* vj = new Juegos(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio);
-                videojuegos.push_back(vj);
+                if(compania == "Microsoft"){
+                  videojuegos.push_back(new Juegos_Microsoft(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio, compania));
+                }else if(compania == "Sony"){
+                  videojuegos.push_back(new JuegosSony(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio, compania));
+                }else if(compania == "Nintendo"){
+                  videojuegos.push_back(new JuegosNintendo(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio, compania));
+                }else if(compania == "Bandai"){
+                  videojuegos.push_back(new Bandai(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio, compania));
+                }else if(compania == "Konami"){
+                  videojuegos.push_back(new Konami(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio, compania));
+                }else if(compania == "Square Enix"){
+                  videojuegos.push_back(new SquareEnix(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio, compania));
+                }else if(compania == "EA"){
+                  videojuegos.push_back(new EA(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio, compania));
+                }else if(compania == "SEGA"){
+                  videojuegos.push_back(new Sega(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio, compania));
+                }else if(compania == "Ubisoft"){
+                  videojuegos.push_back(new Bugisoft(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio, compania));
+                }
+
 
 
 
@@ -321,6 +382,49 @@ int main(){
                 cout << "Ingrese estado del videojuego" << endl;
                 cin >> estado;
 
+                cout << "Ingrese compania de videojuego" << endl;
+
+                cout << "1. Microsoft" << endl <<
+                "2. Sony" << endl <<
+                "3. Nintendo" << endl <<
+                "4. Bandai" << endl <<
+                "5. Konami" << endl <<
+                "6. Square Enix" << endl <<
+                "7. EA" << endl <<
+                "8. SEGA" << endl <<
+                "9. Ubisoft" << endl;
+
+                int opc_compania;
+                cin >> opc_compania;
+
+                while(opc_compania < 0 || opc_compania > 9){
+                  cout << "Numero invalido, ingrese otro numero" << endl;
+                  cin >> opc_compania;
+
+                }
+                string compania;
+                if(opc_compania == 1){
+                  compania = "Microsoft";
+                }else if(opc_compania == 2){
+                  compania = "Sony";
+                }else if(opc_compania == 3){
+                  compania = "Nintendo";
+                }else if(opc_compania == 4){
+                  compania = "Bandai";
+                }else if(opc_compania == 5){
+                  compania = "Konami";
+                }else if(opc_compania == 6){
+                  compania = "Square Enix";
+                }else if(opc_compania == 7){
+                  compania = "EA";
+                }else if(opc_compania == 8){
+                  compania = "SEGA";
+                }else if(opc_compania == 9){
+                  compania = "Ubisoft";
+                }
+
+
+
                 cout << "Ingrese numero de serie";
                 cin >> numserie;
 
@@ -338,7 +442,7 @@ int main(){
                 videojuego -> SetGenero(genero);
                 videojuego -> SetEstado(estado);
                 videojuego -> SetNSerie(numserie);
-
+                videojuego -> setCompania(compania);
               }else{
                 cout << "Opcion invalida";
               }
@@ -585,21 +689,39 @@ bool numSerieJuegos(vector<Juegos*> juegos, int numserie){
 }
 
 
-void crearLog(){
+void crearLog(Venta* venta){
   ofstream outfile;
   time_t currentTime = time(0);
   tm* currentDate = localtime(&currentTime);
   char filename[256] = {0};
 
-  strcpy(filename, "./fmt/");
+  strcpy(filename, "./log_ventas/");
   strcat(filename, fmt("%d:%d:%d_%d-%d-%d.log",
          currentDate->tm_hour, currentDate->tm_min, currentDate->tm_sec,
          currentDate->tm_mday, currentDate->tm_mon+1,
          currentDate->tm_year+1900).c_str());
 
+  string temp, temp2;
+  fecha = fmt("%d-%d-%d",currentDate->tm_mday, currentDate->tm_mon+1,
+  currentDate->tm_year+1900).c_str();
+  hora = fmt("%d:%d:%d",currentDate->tm_hour, currentDate->tm_min, currentDate->tm_sec).c_str();
+  stringstream  ss;
+  double impuesto = venta -> getSubtotal() * .15;
+  double total = venta -> getSubtotal() + impuesto;
+  ss << "\t\tGameHub\n\nFecha: " << fecha << "\nHora: " << hora << "\nVendedor: " << venta -> getUsuario() << "\nCliente: " << venta -> getNombreCliente() <<"\nCantidad de Articulos: "<< venta -> getCantidadArticulos() << "\n";
+  /*QUITAR COMLLIASRecorrer un for que tenga los articulos vendidos y mostrar su precio y su nombre*/
+
+  for(int i = 0; i < venta -> getSizeConsolas(); i++){
+    ss << venta(getConsola(i)) << "\n";
+  }
+
+  for(int i = 0; i < venta -> getSizeJuegos(); i++){
+    ss << venta(getJuego(i)) << "\n";
+  }
+
+  ss << "\nSubTotal: "<< venta -> getSubtotal() << "\nImpuesto: " << impuesto << "\nTotal: "<< total;
   outfile.open(filename, std::ios::app);
-  outfile << "\t\tGameHub\nFecha: " << currentDate->tm_mday, currentDate->tm_mon+1,
-  currentDate->tm_year+1900).c_str()<< "\nHora" << ;
+  outfile << ss.str();
   outfile.close();
 
 }

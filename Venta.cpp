@@ -27,11 +27,23 @@ string Venta::getUsuario(){
 }
 
 string Venta::GetConsola(int index){
-  return "" + consolas.at(i) -> getModelo + "" + consolas.at(i) -> getNombre();
+  return "" + consolas.at(i) -> getModelo + "" + consolas.at(i) -> getNombre() + " Precio: " + consolas.at(i) -> GetPrecio();
 }
 
 string Venta::getJuego(int index){
-  return juegos.at(i) -> getNombre;
+  return juegos.at(i) -> getNombre + "Precio: " + juegos.at(i) -> GetPrecio();
+}
+
+double getSubtotal(){
+    double subt = 0.0;
+
+    for(int i = 0; i < Consolas.size(); i++){
+      subt += Consolas[i] -> GetPrecio();
+    }
+
+    for(int i = 0; i < juegos.size(); i++){
+      subt += juegos[i] -> GetPrecio();
+    }
 }
 
 void Venta::setNombre(string nombre){
@@ -48,4 +60,16 @@ void Venta::setUsuario(string user){
 
 double setSubtotal(double subt){
   subtotal = subt;
+}
+
+int getCantidadArticulos(){
+  return Consolas.size() + juegos.size();
+}
+
+int getSizeConsolas(){
+  return Consolas.size();
+}
+
+int getSizeJuegos(){
+  return juegos.size();
 }

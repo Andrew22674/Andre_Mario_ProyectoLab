@@ -15,6 +15,7 @@ Bandai::Bandai(string nombre, int anio, string consola, int numJug, string gener
     this->estado = estado;
     this->nSerie = nSerie;
     this->precio = precio;
+    this->compania = compania;
 }
 
 Bandai::~Bandai(){

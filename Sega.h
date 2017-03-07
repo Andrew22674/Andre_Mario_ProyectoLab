@@ -6,6 +6,6 @@ private:
 
 public:
     Sega ();
-    Sega(string, int , string , int , string , string , int , double);
+    Sega(string, int , string , int , string , string , int , double, string);
     ~Sega ();
 };
