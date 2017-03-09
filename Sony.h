@@ -5,12 +5,12 @@
 using namespace std;
 
 class Sony : public Consolas {
-private:
-    string nombre;
 
+private:
+  string nombre;
 public:
     Sony();
-    Sony(string,int,double,string,string,string);
+    Sony(int,double,string,string,string);
     void setNombre(string nombre);
     string getNombre();
     ~Sony();

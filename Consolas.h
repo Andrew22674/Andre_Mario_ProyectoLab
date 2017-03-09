@@ -7,25 +7,25 @@ using namespace std;
 #define CONSOLAS_H
 
 class Consolas{
-private:
-  string marca;
+protected:
   int nSerie;
   double precio;
   string anioSalida;
   string estado;
+  string modelo;
 
 public:
   Consolas();
 
-  Consolas(string,int,double,string,string);
+  Consolas(int,double,string,string);
 
   string GetAnioSalida();
 
   void SetAnioSalida(string anioSalida);
 
-  string GetMarca();
+  //string GetMarca();
 
-  void SetMarca(string marca);
+  //void SetMarca(string marca);
 
   int GetNSerie();
 

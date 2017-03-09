@@ -6,7 +6,7 @@ Nintendo::Nintendo(){
 
 }
 
-Nintendo::Nintendo(string marca, int nSerie, double precio, string anioSalida,string estado, string nombre) : Consolas(marca,nSerie,precio,anioSalida,estado){
+Nintendo::Nintendo(int nSerie, double precio, string anioSalida,string estado, string nombre) : Consolas(nSerie,precio,anioSalida,estado){
     this->nombre=nombre;
 }
 

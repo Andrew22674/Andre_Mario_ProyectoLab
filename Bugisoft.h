@@ -1,6 +1,6 @@
 #pragma once
 
-class Bugisoft :  public Juegos{
+class Bugisoft:public Juegos{
 private:
 
 

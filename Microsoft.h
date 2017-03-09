@@ -10,7 +10,7 @@ private:
 
 public:
     Microsoft();
-    Microsoft(string,int,double,string,string,string);
+    Microsoft(int,double,string,string,string);
     void setNombre(string nombre);
     string getNombre();
     ~Microsoft();
