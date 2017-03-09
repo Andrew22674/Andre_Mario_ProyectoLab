@@ -33,6 +33,7 @@ using namespace std;
 bool validarNumSerie(vector<Consolas*>, int);
 bool numSerieJuegos(vector<Juegos*>, int);
 void crearLog(Venta*);
+void addConsola(vector<Consolas*>, Consolas*);
 
 string fmt(const std::string& fmt, ...) {
 
@@ -280,7 +281,7 @@ int main(){
                   cout << "Numero de serie ya existe, ingrese otro numero" << endl;
                   cin >> numserie;
                 }
-
+/*
                 if(compania == "Microsoft"){
                   videojuegos.push_back(new JuegosMicrosoft(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
                 }else if(compania == "Sony"){
@@ -301,7 +302,7 @@ int main(){
                   videojuegos.push_back(new Bugisoft(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
                 }
 
-
+*/
 
 
 
@@ -855,4 +856,8 @@ void crearLog(Venta* venta){
   outfile << ss.str();
   outfile.close();
 
+}
+
+void addConsola(vector<Consolas*> consolas, Consolas* consola){
+  consolas.push_back(consola);
 }
