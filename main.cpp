@@ -64,6 +64,7 @@ string fmt(const std::string& fmt, ...) {
 
 
 int main(){
+
   //cout << typeid(Microsoft).name() << endl;
   vector<Consolas*> consolas;
   vector<UsuarioAdmin*> usuariosadmin;
@@ -71,7 +72,10 @@ int main(){
   ClaseAdmin* claseadmin = new ClaseAdmin();
   int opcion = 0;
   int dinerousuario = 0, articulosvendidos = 0;
+
+
   cout << "Size de vector del archivo binario " << leerConsolas().size() << endl;
+  //agregando objetos del archivo binario al vector de consolas
   for(int i =0; i < leerConsolas().size(); i++){
     consolas.push_back(leerConsolas()[i]);
   }
@@ -725,12 +729,18 @@ int main(){
                       }
                     }
                   }else{
-                    cout << "Ingreso una opcion invalida";
+                    cout << "Ingreso una opcion invalida" << endl;
                   }
 
                 cout << "Ingrese indice de consola que desea agregar al carrito" << endl;
                 int index;
                 cin >> index;
+
+                while(index < 0 || index > consolas.size() - 1){
+                  cout << "Ingreso indice fuera del rango del size de consolas, ingrese otro numero" << endl;
+                  cin >> index;
+                }
+
 
 
                 //cons.push_back(consolas[index]);
