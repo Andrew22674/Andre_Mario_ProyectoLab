@@ -7,12 +7,11 @@ using namespace std;
 class Sony : public Consolas {
 
 private:
-  string nombre;
-  string marca;
+  //string nombre;
 public:
     Sony();
     Sony(int,double,string,string,string);
-    void setNombre(string nombre);
-    string getNombre();
+    /*void setNombre(string nombre);
+    string getNombre();*/
     ~Sony();
 };

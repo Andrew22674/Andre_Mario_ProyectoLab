@@ -6,15 +6,14 @@ Sony::Sony(){
 
 }
 
-Sony::Sony( int nSerie, double precio, string anioSalida,string estado, string nombre) : Consolas(nSerie,precio,anioSalida,estado){
-    this->nombre=nombre;
-    this->marca = "Sony";
+Sony::Sony(int nSerie, double precio, string anioSalida,string estado, string modelo) : Consolas(nSerie,precio,anioSalida,estado, modelo){
 }
 
-void Sony::setNombre(string nombre){
+/*void Sony::setNombre(string nombre){
     this->nombre=nombre;
 }
 
 string Sony::getNombre(){
     return nombre;
 }
+*/

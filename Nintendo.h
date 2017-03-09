@@ -6,13 +6,13 @@ using namespace std;
 
 class Nintendo : public Consolas {
 private:
-    string nombre;
-    string marca;
+    //string nombre;
+
 
 public:
     Nintendo();
     Nintendo(int,double,string,string,string);
-    void setNombre(string nombre);
-    string getNombre();
+    /*void setNombre(string nombre);
+    string getNombre();*/
     ~Nintendo();
 };

@@ -6,15 +6,16 @@ Microsoft::Microsoft(){
 
 }
 
-Microsoft::Microsoft(int nSerie, double precio, string anioSalida,string estado, string nombre) : Consolas(nSerie,precio,anioSalida,estado){
-    this->nombre=nombre;
-    this->marca = "Microsoft";
+Microsoft::Microsoft(int nSerie, double precio, string anioSalida,string estado, string modelo) : Consolas(nSerie,precio,anioSalida,estado, modelo){
+
+
 }
 
-void Microsoft::setNombre(string nombre){
+/*void Microsoft::setNombre(string nombre){
     this->nombre=nombre;
 }
 
 string Microsoft::getNombre(){
     return nombre;
 }
+*/

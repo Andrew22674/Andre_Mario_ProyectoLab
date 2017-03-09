@@ -26,6 +26,7 @@
 #include "UsuarioVendedor.h"
 #include "UsuarioAdmin.h"
 #include "Venta.h"
+#include "ClaseAdmin.h"
 
 
 using namespace std;
@@ -36,6 +37,8 @@ void crearLogVenta(Venta*);
 void crearLogVendedor(UsuarioVendedor*, int, int);
 void addConsola(vector<Consolas*>, Consolas*);
 string getHora();
+void guardarConsolas(vector<Consolas*>);
+vector<Consolas*> leerConsolas();
 
 string fmt(const std::string& fmt, ...) {
 
@@ -65,9 +68,15 @@ int main(){
   vector<Consolas*> consolas;
   vector<UsuarioAdmin*> usuariosadmin;
   vector<Juegos*> videojuegos;
+  ClaseAdmin* claseadmin = new ClaseAdmin();
   int opcion = 0;
   int dinerousuario = 0, articulosvendidos = 0;
+  cout << "Size de vector del archivo binario " << leerConsolas().size() << endl;
+  for(int i =0; i < leerConsolas().size(); i++){
+    consolas.push_back(leerConsolas()[i]);
+  }
 
+  cout << "Size de vector de consolas: " << consolas.size() << endl;
 
   usuariosadmin.push_back(new UsuarioAdmin("Andre", "andre123"));
 
@@ -285,7 +294,7 @@ int main(){
                   cin >> numserie;
                 }
 
-                /*if(compania == "Microsoft"){
+                if(compania == "Microsoft"){
                   videojuegos.push_back(new JuegosMicrosoft(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
                 }else if(compania == "Sony"){
                   videojuegos.push_back(new JuegosSony(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
@@ -297,13 +306,13 @@ int main(){
                   videojuegos.push_back(new Konami(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
                 }else if(compania == "Square Enix"){
                   videojuegos.push_back(new SquareEnix(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
-                }*/if(compania == "EA"){
+                }if(compania == "EA"){
                   videojuegos.push_back(new EA(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
-                }/*else if(compania == "SEGA"){
+                }else if(compania == "SEGA"){
                   videojuegos.push_back(new Sega(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
                 }else if(compania == "Ubisoft"){
                   videojuegos.push_back(new Bugisoft(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
-                }*/
+                }
               }else{
                 cout << "Opcion invalida";
               }
@@ -696,7 +705,7 @@ int main(){
                     cout << "Consolas de Microsoft: " << endl;
                     for(int i =0; i< consolas.size(); i++){
                       if(/*((Microsoft*) consolas.at(i))*/typeid(*consolas[i]).name() == typeid(Microsoft).name()){
-                        cout << i << " " << ((Microsoft*)consolas[i]) -> getNombre() << endl;
+                        cout << i << " " << ((Microsoft*)consolas[i]) -> getModelo() << endl;
                       }
                     }
 
@@ -704,7 +713,7 @@ int main(){
                     cout << "Consolas de Sony: " << endl;
                     for(int i =0; i< consolas.size(); i++){
                       if(typeid(*consolas[i]) == typeid(Sony)){
-                        cout << i << " " << ((Sony*)consolas[i]) -> getNombre() << endl;
+                        cout << i << " " << ((Sony*)consolas[i]) -> getModelo() << endl;
                       }
 
                     }
@@ -712,7 +721,7 @@ int main(){
                     cout << "Consolas de Nintendo: " << endl;
                     for(int i =0; i< consolas.size(); i++){
                       if(typeid(*consolas[i]) == typeid(Nintendo)){
-                        cout << i << " " << ((Nintendo*)consolas[i]) -> getNombre() << endl;
+                        cout << i << " " << ((Nintendo*)consolas[i]) -> getModelo() << endl;
                       }
                     }
                   }else{
@@ -848,6 +857,7 @@ int main(){
 
 
   }
+  guardarConsolas(consolas);
 
   return 0;
 }
@@ -967,4 +977,49 @@ string getHora(){
   ss << hora << ":" << min;
 
   return ss.str();
+}
+
+
+void guardarConsolas(vector<Consolas*> consolas){
+    ofstream fout("./Binario/DataConsolas.bin", ios::out | ios::binary);
+    //fout.open()
+    //if (fout.is_open()) {
+        std::cout << "Entre al if" << '\n';
+        //while (!fout.eof()) {
+            //std::cout << "Entre al while" << '\n';
+            //std::cout << "Enteros size: "<< enteros.size() << '\n';
+            int size1 = consolas.size();
+                fout.write((char*)&size1, sizeof(size1));
+                fout.write((char*)consolas.data(), size1 * sizeof(int));
+
+            //fout.close();
+        //}
+        //fout.flush();
+        fout.close();
+        cout<<"copiado con exito"<<endl;
+    //}
+
+
+}
+
+vector<Consolas*> leerConsolas(){
+  vector<Consolas*> list2;
+
+  ifstream is("./Binario/DataConsolas.bin", ios::binary);
+      int size2;
+      is.read((char*)&size2, 4);
+      list2.resize(size2);
+
+       // Is it safe to read a whole array of structures directly into the vector?
+      is.read((char*)&list2[0], size2 * sizeof(list2));
+
+      //std::cout << "Size del vector: " << list2.size() <<endl;
+      /*for (int i = 0; i < list2.size(); i++) {
+          std::cout << i << ". " << list2[i] << '\n';
+
+      }*/
+      //std::cout << "Antes de cerrar" << '\n';
+      is.close();
+
+      return list2;
 }

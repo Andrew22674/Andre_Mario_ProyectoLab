@@ -36,17 +36,17 @@ string Venta::GetConsola(int index){
   if (typeid(*consolas[index]).name() == typeid(Microsoft).name()){
     Consolas* consola = consolas.at(index);
     //cout << "Es Microsoft" << endl;
-    ss << ((Microsoft*)consola) -> getNombre()  << " Precio: " << consolas.at(index) -> GetPrecio();
+    ss << ((Microsoft*)consola) -> getModelo()  << " Precio: " << consolas.at(index) -> GetPrecio();
   }else if ( typeid(*consolas[index]).name() == typeid(Sony).name()){
     Consolas* consola = consolas.at(index);
     //cout << "Es Sony" << endl;
 
-    ss << ((Sony*)consola) -> getNombre()  << " Precio: " << consolas.at(index) -> GetPrecio();
+    ss << ((Sony*)consola) -> getModelo()  << " Precio: " << consolas.at(index) -> GetPrecio();
   }else if (typeid(*consolas[index]).name() == typeid(Nintendo).name()){
     Consolas* consola = consolas.at(index);
     //cout << "Es Nintendo" << endl;
 
-    ss << ((Nintendo*)consola) -> getNombre()  << " Precio: " << consolas.at(index) -> GetPrecio();
+    ss << ((Nintendo*)consola) -> getModelo()  << " Precio: " << consolas.at(index) -> GetPrecio();
   }
 
   return ss.str();

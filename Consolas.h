@@ -17,7 +17,7 @@ protected:
 public:
   Consolas();
 
-  Consolas(int,double,string,string);
+  Consolas(int,double,string,string, string);
 
   virtual string GetAnioSalida();
 
@@ -38,6 +38,11 @@ public:
   virtual string getEstado();
 
   virtual void setEstado(string);
+
+  virtual string getModelo();
+
+  virtual void setModelo(string);
+
 
   ~Consolas();
 };

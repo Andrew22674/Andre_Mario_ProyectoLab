@@ -1,5 +1,5 @@
-Proyecto:	main.o Consolas.o Microsoft.o Sony.o Nintendo.o UsuarioAdmin.o UsuarioVendedor.o Juegos.o Venta.o EA.o Bugisoft.o Bandai.o JuegosSony.o JuegosNintendo.o JuegosMicrosoft.o Konami.o Sega.o SquareEnix.o
-	g++ main.o Consolas.o Microsoft.o Sony.o Nintendo.o UsuarioAdmin.o UsuarioVendedor.o Juegos.o Venta.o EA.o Bugisoft.o Bandai.o JuegosSony.o JuegosNintendo.o JuegosMicrosoft.o Konami.o Sega.o SquareEnix.o -o Proyecto
+Proyecto:	main.o Consolas.o Microsoft.o Sony.o Nintendo.o UsuarioAdmin.o UsuarioVendedor.o Juegos.o Venta.o EA.o Bugisoft.o Bandai.o JuegosSony.o JuegosNintendo.o JuegosMicrosoft.o Konami.o Sega.o SquareEnix.o ClaseAdmin.o
+	g++ main.o Consolas.o Microsoft.o Sony.o Nintendo.o UsuarioAdmin.o UsuarioVendedor.o Juegos.o Venta.o EA.o Bugisoft.o Bandai.o JuegosSony.o JuegosNintendo.o JuegosMicrosoft.o Konami.o Sega.o SquareEnix.o ClaseAdmin.o -o Proyecto
 
 main.o:	main.cpp Consolas.h Microsoft.h Sony.h Nintendo.h UsuarioAdmin.h UsuarioVendedor.h Juegos.h
 	g++ -c main.cpp
@@ -54,6 +54,9 @@ Sega.o: Sega.cpp Sega.h
 
 SquareEnix.o: SquareEnix.cpp SquareEnix.h
 	g++ -c SquareEnix.cpp
+
+ClaseAdmin.o: ClaseAdmin.cpp ClaseAdmin.h
+	g++ -c ClaseAdmin.cpp
 
 clean:
 	rm *.o Proyecto

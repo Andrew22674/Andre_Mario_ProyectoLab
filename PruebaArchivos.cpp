@@ -32,11 +32,11 @@ std::string fmt(const std::string& fmt, ...) {
 void binario(){
     ofstream fout("./Binario/Data.AFe", ios::out | ios::binary);
     vector<int> enteros;
-    enteros.push_back(1);
-    enteros.push_back(2);
-    enteros.push_back(3);
-    enteros.push_back(4);
-    enteros.push_back(5);
+    enteros.push_back(12);
+    enteros.push_back(21);
+    enteros.push_back(13);
+    enteros.push_back(31);
+    enteros.push_back(41);
     //fout.open()
     //if (fout.is_open()) {
         std::cout << "Entre al if" << '\n';

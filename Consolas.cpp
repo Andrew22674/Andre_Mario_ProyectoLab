@@ -10,12 +10,13 @@ Consolas::Consolas(){
 
 }
 
-Consolas::Consolas(int nSerie, double precio, string anioSalida, string estado){
+Consolas::Consolas(int nSerie, double precio, string anioSalida, string estado, string modelo){
 
     this->nSerie=nSerie;
     this->precio=precio;
     this->anioSalida=anioSalida;
     this->estado=estado;
+    this->modelo=modelo;
 }
 
 string Consolas::GetAnioSalida(){
@@ -58,6 +59,13 @@ void Consolas::setEstado(string estado){
     this->estado = estado;
 }
 
+string Consolas::getModelo(){
+  return modelo;
+}
+
+void Consolas::setModelo(string modelo){
+  this->modelo = modelo;
+}
 Consolas::~Consolas(){
     cout<<"Destruyendo objeto consolas"<<endl;
 }
