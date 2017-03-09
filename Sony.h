@@ -8,6 +8,7 @@ class Sony : public Consolas {
 
 private:
   string nombre;
+  string marca;
 public:
     Sony();
     Sony(int,double,string,string,string);

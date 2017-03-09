@@ -7,7 +7,7 @@ using namespace std;
 class Microsoft : public Consolas {
 private:
     string nombre;
-
+    string marca;
 public:
     Microsoft();
     Microsoft(int,double,string,string,string);

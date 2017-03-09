@@ -35,16 +35,16 @@ string Venta::GetConsola(int index){
   //cout << typeid(*consolas[index]).name() << endl;
   if (/*typeid(*consolas[index]).name() == typeid(Microsoft)*/ ((Microsoft*) consolas[index])){
     Consolas* consola = consolas.at(index);
-    cout << "Es Microsoft" << endl;
+    //cout << "Es Microsoft" << endl;
     ss << ((Microsoft*)consola) -> getNombre()  << " Precio: " << consolas.at(index) -> GetPrecio();
   }else if ( /*typeid(*consolas[index]).name() == typeid(Sony)*/ ((Sony*) consolas[index])){
     Consolas* consola = consolas.at(index);
-    cout << "Es Sony" << endl;
+    //cout << "Es Sony" << endl;
 
     ss << ((Sony*)consola) -> getNombre()  << " Precio: " << consolas.at(index) -> GetPrecio();
   }else if (/*typeid(*consolas[index]).name() == typeid(Nintendo)*/ ((Nintendo*) consolas[index])){
     Consolas* consola = consolas.at(index);
-    cout << "Es Nintendo" << endl;
+    //cout << "Es Nintendo" << endl;
 
     ss << ((Nintendo*)consola) -> getNombre()  << " Precio: " << consolas.at(index) -> GetPrecio();
   }
@@ -54,7 +54,7 @@ string Venta::GetConsola(int index){
 
 string Venta::getJuego(int index){
   stringstream ss;
-  ss << juegos.at(index) -> GetNombre() << "Precio: " << juegos.at(index) -> GetPrecio();
+  ss << juegos.at(index) -> GetNombre() << " Precio: " << juegos.at(index) -> GetPrecio();
   return ss.str();
 }
 

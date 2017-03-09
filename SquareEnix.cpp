@@ -1,4 +1,6 @@
 #include "SquareEnix.h"
+#include "Juegos.h"
+#include <string>
 
 using namespace std;
 

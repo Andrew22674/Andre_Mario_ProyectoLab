@@ -1,4 +1,5 @@
 #include "JuegosMicrosoft.h"
+#include "Juegos.h"
 
 using namespace std;
 

@@ -1,5 +1,6 @@
 #pragma once
-
+#include "Juegos.h"
+#include <string>
 class JuegosMicrosoft :  public Juegos{
 private:
 

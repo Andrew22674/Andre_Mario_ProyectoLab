@@ -7,6 +7,7 @@ using namespace std;
 class Nintendo : public Consolas {
 private:
     string nombre;
+    string marca;
 
 public:
     Nintendo();

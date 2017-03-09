@@ -32,8 +32,10 @@ using namespace std;
 
 bool validarNumSerie(vector<Consolas*>, int);
 bool numSerieJuegos(vector<Juegos*>, int);
-void crearLog(Venta*);
+void crearLogVenta(Venta*);
+void crearLogVendedor(UsuarioVendedor*, int, int);
 void addConsola(vector<Consolas*>, Consolas*);
+string getHora();
 
 string fmt(const std::string& fmt, ...) {
 
@@ -59,20 +61,13 @@ string fmt(const std::string& fmt, ...) {
 
 
 int main(){
-    //cout << typeid(Microsoft).name() << endl;
-
+  //cout << typeid(Microsoft).name() << endl;
   vector<Consolas*> consolas;
   vector<UsuarioAdmin*> usuariosadmin;
   vector<Juegos*> videojuegos;
   int opcion = 0;
+  int dinerousuario = 0, articulosvendidos = 0;
 
-
-  EA* juego = new EA("Idk", 123, "s", 12, "12", "2",1,32.0);
-  cout << typeid(juego).name() << endl;
-
-  videojuegos.push_back(juego);
-
-  cout << typeid(videojuegos.back()).name() << endl;
 
   usuariosadmin.push_back(new UsuarioAdmin("Andre", "andre123"));
 
@@ -177,10 +172,11 @@ int main(){
                 cout << "Ingrese anio en que salio la consola" << endl;
                 cin >> releasedate;
                 cout << "Ingrese modelo" << endl;
-                cin >> modelo;
+                cin.ignore();
+                getline(cin,modelo);
                 cout << "Ingrese estado de la consola" << endl;
                 cin >> estado;
-                cout << "Ingrese precio";
+                cout << "Ingrese precio" << endl;
                 cin >> precio;
                 int contador = 1;
                 while(contador <= cantidadconsolas){
@@ -215,12 +211,14 @@ int main(){
                 int jugadores, numserie, releasedate;
                 double precio;
 
+                cin.ignore();
                 cout << "Ingrese nombre del juego" << endl;
-                cin >> nombre;
+                getline(cin,nombre);
                 cout << "Ingrese anio en que salio el juego" << endl;
                 cin >> releasedate;
                 cout << "Ingrese para que consola esta disponible" << endl;
-                cin >> consola;
+                cin.ignore();
+                getline(cin,consola);
                 cout << "Ingrese maximo numero de jugadores" << endl;
                 cin >> jugadores;
                 cout << "Ingrese genero del videojuego" << endl;
@@ -281,8 +279,8 @@ int main(){
                   cout << "Numero de serie ya existe, ingrese otro numero" << endl;
                   cin >> numserie;
                 }
-/*
-                if(compania == "Microsoft"){
+
+                /*if(compania == "Microsoft"){
                   videojuegos.push_back(new JuegosMicrosoft(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
                 }else if(compania == "Sony"){
                   videojuegos.push_back(new JuegosSony(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
@@ -294,18 +292,13 @@ int main(){
                   videojuegos.push_back(new Konami(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
                 }else if(compania == "Square Enix"){
                   videojuegos.push_back(new SquareEnix(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
-                }else if(compania == "EA"){
+                }*/if(compania == "EA"){
                   videojuegos.push_back(new EA(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
-                }else if(compania == "SEGA"){
+                }/*else if(compania == "SEGA"){
                   videojuegos.push_back(new Sega(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
                 }else if(compania == "Ubisoft"){
                   videojuegos.push_back(new Bugisoft(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
-                }
-
-*/
-
-
-
+                }*/
               }else{
                 cout << "Opcion invalida";
               }
@@ -318,7 +311,8 @@ int main(){
 
               cout << "Ingrese nombre de usuario" << endl;
               string n_usuario;
-              cin >> n_usuario;
+              cin.ignore();
+              getline(cin,n_usuario);
 
               cout << "Ingrese contrasena de nuevo usuario" << endl;
               string n_contrasena;
@@ -362,11 +356,14 @@ int main(){
                 cout << "Ingrese anio en que salio la consola" << endl;
                 cin >> releasedate;
                 cout << "Ingrese modelo" << endl;
-                cin >> modelo;
+                cin.ignore();
+                getline(cin,modelo);
                 cout << "Ingrese estado de la consola" << endl;
                 cin >> estado;
-                cout << "Ingrese precio";
+                cout << "Ingrese precio" << endl;
                 cin >> precio;
+                cout << "Ingrese numero de serie" << endl;
+                cin >> numserie;
                 while(validarNumSerie(consolas, numserie)){
                   cout << "Numero de serie ya existe" << endl
                   << "Ingrese otro numero de serie" << endl;
@@ -395,11 +392,13 @@ int main(){
                 double precio;
 
                 cout << "Ingrese nombre del juego" << endl;
-                cin >> nombre;
+                cin.ignore();
+                getline(cin,nombre);
                 cout << "Ingrese anio en que salio el juego" << endl;
                 cin >> releasedate;
                 cout << "Ingrese para que consola esta disponible" << endl;
-                cin >> consola;
+                cin.ignore();
+                getline(cin,consola);
                 cout << "Ingrese maximo numero de jugadores" << endl;
                 cin >> jugadores;
                 cout << "Ingrese genero del videojuego" << endl;
@@ -449,7 +448,8 @@ int main(){
                 }
 
 
-
+                cout << "Ingrese precio" << endl;
+                cin >> precio;
                 cout << "Ingrese numero de serie";
                 cin >> numserie;
 
@@ -467,6 +467,7 @@ int main(){
                 videojuego -> SetGenero(genero);
                 videojuego -> SetEstado(estado);
                 videojuego -> SetNSerie(numserie);
+                videojuego -> SetPrecio(precio);
               }else{
                 cout << "Opcion invalida";
               }
@@ -510,21 +511,22 @@ int main(){
       }
     }else if(opcion == 2){//usuario vendedor
 
-      time_t t = time(0);
+      /*time_t t = time(0);
       struct tm * fechahora = localtime( & t );
 
       int hora = fechahora -> tm_hour;
       int min = fechahora -> tm_min;
       int seg = fechahora -> tm_sec;
 
-      string hora_ent = "" + hora;// + ":" + min + ":" + seg;
+      string hora_ent = "" + hora;// + ":" + min + ":" + seg;*/
 
 
 
       string nombre;
       cout << "Ingrese nombre" << endl;
-      cin >> nombre;
-      UsuarioVendedor* usuario_v = new UsuarioVendedor(nombre, hora_ent);
+      cin.ignore();
+      getline(cin,nombre);
+      UsuarioVendedor* usuario_v = new UsuarioVendedor(nombre, getHora());
 
       int opcionvendedor = 0;
 
@@ -570,7 +572,8 @@ int main(){
             cout << "Ingrese anio en que salio la consola" << endl;
             cin >> releasedate;
             cout << "Ingrese modelo" << endl;
-            cin >> modelo;
+            cin.ignore();
+            getline(cin,modelo);
             cout << "Ingrese estado de la consola" << endl;
             cin >> estado;
             cout << "Ingrese precio" << endl;
@@ -609,11 +612,13 @@ int main(){
             double precio;
 
             cout << "Ingrese nombre del juego" << endl;
-            cin >> nombre;
+            cin.ignore();
+            getline(cin,nombre);
             cout << "Ingrese anio en que salio el juego" << endl;
             cin >> releasedate;
             cout << "Ingrese para que consola esta disponible" << endl;
-            cin >> consola;
+            cin.ignore();
+            getline(cin,consola);
             cout << "Ingrese maximo numero de jugadores" << endl;
             cin >> jugadores;
             cout << "Ingrese genero del videojuego" << endl;
@@ -644,7 +649,8 @@ int main(){
           usuario_v -> vender();
           cout << "Ingrese nombre de cliente" << endl;
           string nombre_cliente;
-          cin >> nombre_cliente;
+          cin.ignore();
+          getline(cin, nombre_cliente);
 
           time_t t = time(0);
           struct tm * fechahora = localtime( & t );
@@ -733,8 +739,80 @@ int main(){
                 cout << "1. Microsoft" << endl <<
                 "2. Sony" << endl <<
                 "3. Nintendo" << endl <<
-                "4. " << endl;
+                "4. Bandai" << endl <<
+                "5. Ubisoft" << endl <<
+                "6. Konami" << endl <<
+                "7. EA" << endl <<
+                "8. SEGA" << endl <<
+                "9. Square Enix" << endl;
+
+                int opc_vid;
+                cin >> opc_vid;
+
+                if(opc_vid == 1){
+                  for(int i = 0; i<videojuegos.size(); i++){
+                    if(typeid(*videojuegos[i]).name() == typeid(Microsoft).name()){
+                      cout << i << " " << videojuegos[i] -> GetNombre() << endl;
+                    }
+                  }
+                }else if(opc_vid == 2){
+                  for(int i = 0; i<videojuegos.size(); i++){
+                    if(typeid(*videojuegos[i]).name() == typeid(Sony).name()){
+                      cout << i << " " << videojuegos[i] -> GetNombre() << endl;
+                    }
+                  }
+                }else if(opc_vid == 3){
+                  for(int i = 0; i<videojuegos.size(); i++){
+                    if(typeid(*videojuegos[i]).name() == typeid(Nintendo).name()){
+                      cout << i << " " << videojuegos[i] -> GetNombre() << endl;
+                    }
+                  }
+                }else if(opc_vid == 4){
+                  for(int i = 0; i<videojuegos.size(); i++){
+                    if(typeid(*videojuegos[i]).name() == typeid(Bandai).name()){
+                      cout << i << " " << videojuegos[i] -> GetNombre() << endl;
+                    }
+                  }
+                }else if(opc_vid == 5){
+                  for(int i = 0; i<videojuegos.size(); i++){
+                    if(typeid(*videojuegos[i]).name() == typeid(Bugisoft).name()){
+                      cout << i << " " << videojuegos[i] -> GetNombre() << endl;
+                    }
+                  }
+                }else if(opc_vid == 6){
+                  for(int i = 0; i<videojuegos.size(); i++){
+                    if(typeid(*videojuegos[i]).name() == typeid(Konami).name()){
+                      cout << i << " " << videojuegos[i] -> GetNombre() << endl;
+                    }
+                  }
+                }else if(opc_vid == 7){
+                  for(int i = 0; i<videojuegos.size(); i++){
+                    if(typeid(*videojuegos[i]).name() == typeid(EA).name()){
+                      cout << i << " " << videojuegos[i] -> GetNombre() << endl;
+                    }
+                  }
+                }else if(opc_vid == 8){
+                  for(int i = 0; i<videojuegos.size(); i++){
+                    if(typeid(*videojuegos[i]).name() == typeid(Sega).name()){
+                      cout << i << " " << videojuegos[i] -> GetNombre() << endl;
+                    }
+                  }
+                }else if(opc_vid == 9){
+                  for(int i = 0; i<videojuegos.size(); i++){
+                    if(typeid(*videojuegos[i]).name() == typeid(SquareEnix).name()){
+                      cout << i << " " << videojuegos[i] -> GetNombre() << endl;
+                    }
+                  }
+                }
+
+                cout << "Ingrese indice de video juego que desea agregar al carrito" << endl;
+                int index;
+                cin >> index;
+
+                venta -> setJuego(videojuegos[index]);
+                videojuegos.erase(videojuegos.begin() + index);
                 cout << "Dese seguir agregando videojuegos al carrito[s/n]" << endl;
+                cin >> seguir;
               }
 
             }
@@ -743,7 +821,9 @@ int main(){
             cin >> add_cons_o_video;
 
           }
-          crearLog(venta);
+          dinerousuario += (venta -> getSubtotal() * 0.15) + venta -> getSubtotal();
+          articulosvendidos += venta -> getCantidadArticulos();
+          crearLogVenta(venta);
 
 
         }else if(opcionvendedor == 3){
@@ -752,6 +832,11 @@ int main(){
           cout << "Opcion invalida" << endl;
         }
       }
+      usuario_v -> setHoraSalida(getHora());
+      crearLogVendedor(usuario_v, articulosvendidos, dinerousuario);
+      articulosvendidos = 0, dinerousuario = 0;
+      delete usuario_v;
+
 
 
     }
@@ -759,23 +844,6 @@ int main(){
 
 
   }
-  /* fecha y tiempo
-  time_t t = time(0);
-  struct tm * fechahora = localtime( & t );
-
-  int dia = fechahora -> tm_mday;
-  int mes = fechahora -> tm_mon + 1;
-  int anio = fechahora -> tm_year + 1900;
-
-  int hora = fechahora -> tm_hour;
-  int min = fechahora -> tm_min;
-  int seg = fechahora -> tm_sec;
-
-  //cout << (fecha->tm_year + 1900) << "-" << (fecha->tm_mon + 1) << "-" <<  fecha->tm_mday << endl;
-  cout << dia << "-" << mes << "-" << anio << "  " << hora << ":" << min << ":" << seg << endl;
-  */
-
-
 
   return 0;
 }
@@ -817,7 +885,7 @@ bool numSerieJuegos(vector<Juegos*> juegos, int numserie){
 }
 
 
-void crearLog(Venta* venta){
+void crearLogVenta(Venta* venta){
   ofstream outfile;
   time_t currentTime = time(0);
   tm* currentDate = localtime(&currentTime);
@@ -858,6 +926,41 @@ void crearLog(Venta* venta){
 
 }
 
+void crearLogVendedor(UsuarioVendedor* usuario, int cantidadarticulos, int dinero){
+  ofstream outfile;
+  char filename[256] = {0};
+  time_t currentTime = time(0);
+  tm* currentDate = localtime(&currentTime);
+  const int directorio = system("mkdir ./Usuarios_log");
+  strcpy(filename, "./Usuarios_log/");
+  strcat(filename, fmt("%s_%d-%d-%d.log",
+         usuario -> getNombre().c_str(),
+         currentDate->tm_mday, currentDate->tm_mon+1,
+         currentDate->tm_year+1900).c_str());
+  stringstream ss;
+
+  ss << "\t\tGameHub\n\nNombre: " << usuario -> getNombre() << "\nHora entrada: " << usuario -> getHoraEntrada() << "\nHora salida: "
+  << usuario -> getHoraSalida() << "\n\nCantidad de articulos vendidos: " << cantidadarticulos << "\nDinero generado: " << dinero << "\n\n";
+
+  outfile.open(filename, std::ios::app);
+  outfile << ss.str();
+  outfile.close();
+}
+
 void addConsola(vector<Consolas*> consolas, Consolas* consola){
   consolas.push_back(consola);
+}
+
+
+string getHora(){
+  time_t t = time(0);
+  struct tm * fechahora = localtime( & t );
+
+  int hora = fechahora -> tm_hour;
+  int min = fechahora -> tm_min;
+
+  stringstream ss;
+  ss << hora << ":" << min;
+
+  return ss.str();
 }

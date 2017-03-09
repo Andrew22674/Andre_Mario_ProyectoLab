@@ -1,4 +1,6 @@
 #pragma once
+#include "Juegos.h"
+#include <string>
 
 class Sega :  public Juegos{
 private:
