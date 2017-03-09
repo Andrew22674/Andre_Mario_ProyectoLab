@@ -1,4 +1,5 @@
 #include "Bandai.h"
+#include "Juegos.h"
 
 using namespace std;
 

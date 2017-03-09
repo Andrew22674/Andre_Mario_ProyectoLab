@@ -191,12 +191,17 @@ int main(){
                   }
 
                   if(marca == "SONY"){
-                    consolas.push_back(new Sony(numserie, precio, releasedate, estado, modelo));
+                    Sony* sony = new Sony(numserie, precio, releasedate, estado, modelo);
+                    static_cast<Sony*> (sony);
+                    consolas.push_back(sony);
                   }else if(marca == "Microsoft"){
-                    consolas.push_back(new Microsoft(numserie, precio, releasedate, estado, modelo));
+                    Microsoft* microsoft = new Microsoft(numserie, precio, releasedate, estado, modelo);
+                    static_cast<Microsoft*> (microsoft);
+                    consolas.push_back(microsoft);
                   }else{
-                    consolas.push_back(new Nintendo(numserie, precio, releasedate, estado, modelo));
-
+                    Nintendo* nintendo = new Nintendo(numserie, precio, releasedate, estado, modelo);
+                    static_cast<Nintendo*> (nintendo);
+                    consolas.push_back(nintendo);
                   }
 
                 contador++;
@@ -592,14 +597,16 @@ int main(){
 
 
               if(marca == "SONY"){
-                consolas.push_back(new Sony(numserie, precio, releasedate, estado, modelo));
+                Consolas* sony = new Sony(numserie, precio, releasedate, estado, modelo);
+                consolas.push_back(sony);
               }else if(marca == "Microsoft"){
-                consolas.push_back(new Microsoft(numserie, precio, releasedate, estado, modelo));
-                cout << typeid(consolas.back()).name() << endl;
+                Microsoft* microsoft = new Microsoft(numserie, precio, releasedate, estado, modelo);
+                consolas.push_back(microsoft);
+                static_cast<Microsoft*> (consolas.back());
               }else{
-                consolas.push_back(new Nintendo(numserie, precio, releasedate, estado, modelo));
-                cout << typeid(consolas.back()).name() << endl;
-
+                Nintendo* nintendo = new Nintendo(numserie, precio, releasedate, estado, modelo);
+                consolas.push_back(nintendo);
+                static_cast<Nintendo*> (consolas.back());
               }
             contador++;
             }
@@ -681,11 +688,6 @@ int main(){
                   << "2. Sony" << endl
                   << "3. Nintendo" << endl;
 
-
-                  for(int i = 0; i < consolas.size(); i++){
-                    cout << typeid(*consolas[i]).name();
-                  }
-
                   int opc_marca;
                   cin >> opc_marca;
 
@@ -693,7 +695,7 @@ int main(){
 
                     cout << "Consolas de Microsoft: " << endl;
                     for(int i =0; i< consolas.size(); i++){
-                      if(/*((Microsoft*) consolas.at(i))*/typeid(consolas[i]).name() == typeid(Microsoft).name()){
+                      if(/*((Microsoft*) consolas.at(i))*/typeid(*consolas[i]).name() == typeid(Microsoft).name()){
                         cout << i << " " << ((Microsoft*)consolas[i]) -> getNombre() << endl;
                       }
                     }
@@ -701,7 +703,7 @@ int main(){
                   }else if(opc_marca == 2){
                     cout << "Consolas de Sony: " << endl;
                     for(int i =0; i< consolas.size(); i++){
-                      if(typeid(consolas[i]) == typeid(Sony)){
+                      if(typeid(*consolas[i]) == typeid(Sony)){
                         cout << i << " " << ((Sony*)consolas[i]) -> getNombre() << endl;
                       }
 
@@ -709,7 +711,7 @@ int main(){
                   }else if(opc_marca == 3){
                     cout << "Consolas de Nintendo: " << endl;
                     for(int i =0; i< consolas.size(); i++){
-                      if(typeid(consolas[i]) == typeid(Nintendo)){
+                      if(typeid(*consolas[i]) == typeid(Nintendo)){
                         cout << i << " " << ((Nintendo*)consolas[i]) -> getNombre() << endl;
                       }
                     }
@@ -751,19 +753,19 @@ int main(){
 
                 if(opc_vid == 1){
                   for(int i = 0; i<videojuegos.size(); i++){
-                    if(typeid(*videojuegos[i]).name() == typeid(Microsoft).name()){
+                    if(typeid(*videojuegos[i]).name() == typeid(JuegosMicrosoft).name()){
                       cout << i << " " << videojuegos[i] -> GetNombre() << endl;
                     }
                   }
                 }else if(opc_vid == 2){
                   for(int i = 0; i<videojuegos.size(); i++){
-                    if(typeid(*videojuegos[i]).name() == typeid(Sony).name()){
+                    if(typeid(*videojuegos[i]).name() == typeid(JuegosSony).name()){
                       cout << i << " " << videojuegos[i] -> GetNombre() << endl;
                     }
                   }
                 }else if(opc_vid == 3){
                   for(int i = 0; i<videojuegos.size(); i++){
-                    if(typeid(*videojuegos[i]).name() == typeid(Nintendo).name()){
+                    if(typeid(*videojuegos[i]).name() == typeid(JuegosNintendo).name()){
                       cout << i << " " << videojuegos[i] -> GetNombre() << endl;
                     }
                   }
@@ -804,6 +806,8 @@ int main(){
                     }
                   }
                 }
+
+
 
                 cout << "Ingrese indice de video juego que desea agregar al carrito" << endl;
                 int index;

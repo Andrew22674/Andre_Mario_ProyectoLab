@@ -7,7 +7,7 @@ using namespace std;
 #define JUEGOS_H
 
 class Juegos{
-private:
+protected:
     string nombre;
     int anio;
     string consola;
@@ -23,37 +23,37 @@ public:
 
     Juegos(string, int , string , int , string , string , int , double);
 
-    int GetAnio();
+    virtual int GetAnio();
 
-    void SetAnio(int);
+    virtual void SetAnio(int);
 
-    string GetConsola();
+    virtual string GetConsola();
 
-    void SetConsola(string);
+    virtual void SetConsola(string);
 
-    string GetEstado();
+    virtual string GetEstado();
 
-    void SetEstado(string);
+    virtual void SetEstado(string);
 
-    string GetGenero();
+    virtual string GetGenero();
 
-    void SetGenero(string);
+    virtual void SetGenero(string);
 
-    int GetNSerie();
+    virtual int GetNSerie();
 
-    void SetNSerie(int);
+    virtual void SetNSerie(int);
 
-    string GetNombre();
+    virtual string GetNombre();
 
-    void SetNombre(string);
+    virtual void SetNombre(string);
 
-    int GetNumJug();
+    virtual int GetNumJug();
 
-    void SetNumJug(int);
+    virtual void SetNumJug(int);
 
-    double GetPrecio();
+    virtual double GetPrecio();
 
-    void SetPrecio(double precio);
+    virtual void SetPrecio(double precio);
 
     ~Juegos();
 

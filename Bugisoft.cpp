@@ -1,4 +1,5 @@
 #include "Bugisoft.h"
+#include "Juegos.h"
 
 using namespace std;
 

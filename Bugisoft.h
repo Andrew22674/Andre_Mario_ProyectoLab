@@ -1,6 +1,9 @@
 #pragma once
 
-class Bugisoft:public Juegos{
+#include <string>
+#include "Juegos.h"
+
+class Bugisoft : public Juegos{
 private:
 
 

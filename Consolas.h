@@ -19,25 +19,25 @@ public:
 
   Consolas(int,double,string,string);
 
-  string GetAnioSalida();
+  virtual string GetAnioSalida();
 
-  void SetAnioSalida(string anioSalida);
+  virtual void SetAnioSalida(string anioSalida);
 
   //string GetMarca();
 
   //void SetMarca(string marca);
 
-  int GetNSerie();
+  virtual int GetNSerie();
 
-  void SetNSerie(int nSerie);
+  virtual void SetNSerie(int nSerie);
 
-  double GetPrecio();
+  virtual double GetPrecio();
 
-  void SetPrecio(double precio);
+  virtual void SetPrecio(double precio);
 
-  string getEstado();
+  virtual string getEstado();
 
-  void setEstado(string);
+  virtual void setEstado(string);
 
   ~Consolas();
 };
