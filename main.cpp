@@ -6,13 +6,23 @@
 #include <cstdarg>
 #include <fstream>
 #include <sstream>
+#include <cstdlib>
 
-
+#include <typeinfo>
 #include "Consolas.h"
 #include "Juegos.h"
 #include "Sony.h"
 #include "Microsoft.h"
 #include "Nintendo.h"
+#include "Bandai.h"
+#include "Bugisoft.h"
+#include "EA.h"
+#include "JuegosMicrosoft.h"
+#include "JuegosNintendo.h"
+#include "JuegosSony.h"
+#include "Konami.h"
+#include "Sega.h"
+#include "SquareEnix.h"
 #include "UsuarioVendedor.h"
 #include "UsuarioAdmin.h"
 #include "Venta.h"
@@ -25,6 +35,7 @@ bool numSerieJuegos(vector<Juegos*>, int);
 void crearLog(Venta*);
 
 string fmt(const std::string& fmt, ...) {
+
     int size = 200;
     string str;
     va_list ap;
@@ -47,11 +58,20 @@ string fmt(const std::string& fmt, ...) {
 
 
 int main(){
+    //cout << typeid(Microsoft).name() << endl;
 
   vector<Consolas*> consolas;
   vector<UsuarioAdmin*> usuariosadmin;
   vector<Juegos*> videojuegos;
   int opcion = 0;
+
+
+  EA* juego = new EA("Idk", 123, "s", 12, "12", "2",1,32.0);
+  cout << typeid(juego).name() << endl;
+
+  videojuegos.push_back(juego);
+
+  cout << typeid(videojuegos.back()).name() << endl;
 
   usuariosadmin.push_back(new UsuarioAdmin("Andre", "andre123"));
 
@@ -174,13 +194,14 @@ int main(){
                   }
 
                   if(marca == "SONY"){
-                    consolas.push_back(new Sony(marca, numserie, precio, releasedate, estado, modelo));
+                    consolas.push_back(new Sony(numserie, precio, releasedate, estado, modelo));
                   }else if(marca == "Microsoft"){
-                    consolas.push_back(new Microsoft(marca, numserie, precio, releasedate, estado, modelo));
+                    consolas.push_back(new Microsoft(numserie, precio, releasedate, estado, modelo));
                   }else{
-                    consolas.push_back(new Nintendo(marca, numserie, precio, releasedate, estado, modelo));
+                    consolas.push_back(new Nintendo(numserie, precio, releasedate, estado, modelo));
 
                   }
+
                 contador++;
                 }
 
@@ -259,27 +280,27 @@ int main(){
                   cout << "Numero de serie ya existe, ingrese otro numero" << endl;
                   cin >> numserie;
                 }
-                /*
+
                 if(compania == "Microsoft"){
-                  videojuegos.push_back(new Juegos_Microsoft(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio, compania));
+                  videojuegos.push_back(new JuegosMicrosoft(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
                 }else if(compania == "Sony"){
-                  videojuegos.push_back(new JuegosSony(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio, compania));
+                  videojuegos.push_back(new JuegosSony(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
                 }else if(compania == "Nintendo"){
-                  videojuegos.push_back(new JuegosNintendo(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio, compania));
+                  videojuegos.push_back(new JuegosNintendo(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
                 }else if(compania == "Bandai"){
-                  videojuegos.push_back(new Bandai(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio, compania));
+                  videojuegos.push_back(new Bandai(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
                 }else if(compania == "Konami"){
-                  videojuegos.push_back(new Konami(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio, compania));
+                  videojuegos.push_back(new Konami(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
                 }else if(compania == "Square Enix"){
-                  videojuegos.push_back(new SquareEnix(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio, compania));
+                  videojuegos.push_back(new SquareEnix(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
                 }else if(compania == "EA"){
-                  videojuegos.push_back(new EA(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio, compania));
+                  videojuegos.push_back(new EA(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
                 }else if(compania == "SEGA"){
-                  videojuegos.push_back(new Sega(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio, compania));
+                  videojuegos.push_back(new Sega(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
                 }else if(compania == "Ubisoft"){
-                  videojuegos.push_back(new Bugisoft(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio, compania));
+                  videojuegos.push_back(new Bugisoft(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
                 }
-                */
+
 
 
 
@@ -352,11 +373,11 @@ int main(){
                 }
 
                   if(marca == "SONY"){
-                    consolas.at(index) = new Sony(marca, numserie, precio, releasedate, estado, modelo);
+                    consolas.at(index) = new Sony(numserie, precio, releasedate, estado, modelo);
                   }else if(marca == "Microsoft"){
-                    consolas.at(index) = new Microsoft(marca, numserie, precio, releasedate, estado, modelo);
+                    consolas.at(index) = new Microsoft(numserie, precio, releasedate, estado, modelo);
                   }else{
-                    consolas.at(index) = new Nintendo(marca, numserie, precio, releasedate, estado, modelo);
+                    consolas.at(index) = new Nintendo(numserie, precio, releasedate, estado, modelo);
 
                   }
 
@@ -565,12 +586,15 @@ int main(){
                 cin >> numserie;
               }
 
+
               if(marca == "SONY"){
-                consolas.push_back(new Sony(marca, numserie, precio, releasedate, estado, modelo));
+                consolas.push_back(new Sony(numserie, precio, releasedate, estado, modelo));
               }else if(marca == "Microsoft"){
-                consolas.push_back(new Microsoft(marca, numserie, precio, releasedate, estado, modelo));
+                consolas.push_back(new Microsoft(numserie, precio, releasedate, estado, modelo));
+                cout << typeid(consolas.back()).name() << endl;
               }else{
-                consolas.push_back(new Nintendo(marca, numserie, precio, releasedate, estado, modelo));
+                consolas.push_back(new Nintendo(numserie, precio, releasedate, estado, modelo));
+                cout << typeid(consolas.back()).name() << endl;
 
               }
             contador++;
@@ -650,14 +674,19 @@ int main(){
                   << "2. Sony" << endl
                   << "3. Nintendo" << endl;
 
+
+                  for(int i = 0; i < consolas.size(); i++){
+                    cout << typeid(*consolas[i]).name();
+                  }
+
                   int opc_marca;
                   cin >> opc_marca;
 
                   if(opc_marca == 1){
-                    //recorrer un for y solo mostrar las consolas de Microsoft o hacerlo de otra manera
+
                     cout << "Consolas de Microsoft: " << endl;
                     for(int i =0; i< consolas.size(); i++){
-                      if(consolas[i] -> GetMarca() == "Microsoft"){
+                      if(/*((Microsoft*) consolas.at(i))*/typeid(consolas[i]).name() == typeid(Microsoft).name()){
                         cout << i << " " << ((Microsoft*)consolas[i]) -> getNombre() << endl;
                       }
                     }
@@ -665,7 +694,7 @@ int main(){
                   }else if(opc_marca == 2){
                     cout << "Consolas de Sony: " << endl;
                     for(int i =0; i< consolas.size(); i++){
-                      if(consolas[i] -> GetMarca() == "SONY"){
+                      if(typeid(consolas[i]) == typeid(Sony)){
                         cout << i << " " << ((Sony*)consolas[i]) -> getNombre() << endl;
                       }
 
@@ -673,7 +702,7 @@ int main(){
                   }else if(opc_marca == 3){
                     cout << "Consolas de Nintendo: " << endl;
                     for(int i =0; i< consolas.size(); i++){
-                      if(consolas[i] -> GetMarca() == "Nintendo"){
+                      if(typeid(consolas[i]) == typeid(Nintendo)){
                         cout << i << " " << ((Nintendo*)consolas[i]) -> getNombre() << endl;
                       }
                     }
@@ -688,11 +717,23 @@ int main(){
 
                 //cons.push_back(consolas[index]);
                 venta -> setConsola(consolas[index]);
-
+                consolas.erase(consolas.begin() + index);
 
                 cout << "Desea seguir agregando consolas al carrito[s/n]" << endl;
                 cin >> seguir;
 
+              }
+
+            }else if(opc_vender == 2){
+              string seguir = "s";
+
+              while(seguir == "s" || seguir == "S"){
+                cout << "Ingrese compania de videojuegos que desea agregar al carrito" << endl;
+                cout << "1. Microsoft" << endl <<
+                "2. Sony" << endl <<
+                "3. Nintendo" << endl <<
+                "4. " << endl;
+                cout << "Dese seguir agregando videojuegos al carrito[s/n]" << endl;
               }
 
             }
@@ -781,6 +822,10 @@ void crearLog(Venta* venta){
   tm* currentDate = localtime(&currentTime);
   char filename[256] = {0};
 
+  const int directorio = system("mkdir ./log_ventas");
+  if(directorio == -1){
+
+  }
   strcpy(filename, "./log_ventas/");
   strcat(filename, fmt("%d:%d:%d_%d-%d-%d.log",
          currentDate->tm_hour, currentDate->tm_min, currentDate->tm_sec,

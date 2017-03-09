@@ -2,6 +2,9 @@
 #include <sstream>
 #include <string>
 
+#include <typeinfo>
+
+
 
 Venta::Venta(){
   subtotal = 0.0;
@@ -29,17 +32,19 @@ string Venta::getUsuario(){
 
 string Venta::GetConsola(int index){
   stringstream ss;
-  // ((B)a).foo();
-  if ( consolas.at(index) -> GetMarca() == "Microsoft"){
+  //cout << typeid(*consolas[index]).name() << endl;
+  if (/*typeid(*consolas[index]).name() == typeid(Microsoft)*/ ((Microsoft*) consolas[index])){
     Consolas* consola = consolas.at(index);
-
+    cout << "Es Microsoft" << endl;
     ss << ((Microsoft*)consola) -> getNombre()  << " Precio: " << consolas.at(index) -> GetPrecio();
-  }else if ( consolas.at(index) -> GetMarca() == "SONY"){
+  }else if ( /*typeid(*consolas[index]).name() == typeid(Sony)*/ ((Sony*) consolas[index])){
     Consolas* consola = consolas.at(index);
-    
+    cout << "Es Sony" << endl;
+
     ss << ((Sony*)consola) -> getNombre()  << " Precio: " << consolas.at(index) -> GetPrecio();
-  }else if ( consolas.at(index) -> GetMarca() == "Nintendo"){
+  }else if (/*typeid(*consolas[index]).name() == typeid(Nintendo)*/ ((Nintendo*) consolas[index])){
     Consolas* consola = consolas.at(index);
+    cout << "Es Nintendo" << endl;
 
     ss << ((Nintendo*)consola) -> getNombre()  << " Precio: " << consolas.at(index) -> GetPrecio();
   }
