@@ -42,22 +42,39 @@ void binario(){
         std::cout << "Entre al if" << '\n';
         //while (!fout.eof()) {
             std::cout << "Entre al while" << '\n';
-            for (int i = 0; i < enteros.size(); i++) {
-                std::cout << "for " << i << '\n';
-                fout.write((char*)&enteros[i], sizeof(int));
-                //cout<< fout.get(entero[i])<<endl;
-            }
+            std::cout << "Enteros size: "<< enteros.size() << '\n';
+            int size1 = enteros.size();
+                fout.write((char*)&size1, sizeof(size1));
+                fout.write((char*)enteros.data(), size1 * sizeof(int));
+
             //fout.close();
         //}
-        //fout.close();
-        cout<<"copiado con exito";
+        fout.close();
+        cout<<"copiado con exito"<<endl;
     //}
 
 
 }
 
 void leerBinario(){
-    FILE* file;
+    vector<int> list2;
+
+    ifstream is("./Binario/Data.AFe", ios::binary);
+        int size2;
+        is.read((char*)&size2, 4);
+        list2.resize(size2);
+
+         // Is it safe to read a whole array of structures directly into the vector?
+        is.read((char*)&list2[0], size2 * sizeof(list2));
+
+        std::cout << "Size del vector: " << list2.size() <<endl;
+        for (int i = 0; i < list2.size(); i++) {
+            std::cout << i << ". " << list2[i] << '\n';
+        }
+        std::cout << "Antes de cerrar" << '\n';
+        is.close();
+
+    /*FILE* file;
     long lSize;
 
 
@@ -70,7 +87,14 @@ void leerBinario(){
 
     fseek(file,0,SEEK_END);
     lSize = ftell(file);
-    rewind(file);
+    rewind(file);*/
+
+
+
+
+
+
+
     /*ifstream file("./Binario/Data.AFe", ios::out | ios::binary);
 
     // Stop eating new lines in binary mode!!!
@@ -94,9 +118,9 @@ void leerBinario(){
 */
 
 
-    for (int i = 0; i < vec.size(); i++) {
+    /*for (int i = 0; i < vec.size(); i++) {
         std::cout << vec[i] << '\n';
-    }
+    }*/
 
 }
 
