@@ -56,6 +56,50 @@ void binario(){
 
 }
 
+void leerBinario(){
+    FILE* file;
+    long lSize;
+
+
+    file = fopen("Data.AFe", "rb");
+
+    if (file == NULL) {
+        fputs("File error", stderr);
+        exit(1);
+    }
+
+    fseek(file,0,SEEK_END);
+    lSize = ftell(file);
+    rewind(file);
+    /*ifstream file("./Binario/Data.AFe", ios::out | ios::binary);
+
+    // Stop eating new lines in binary mode!!!
+  file.unsetf(std::ios::skipws);
+
+  // get its size:
+  std::streampos fileSize;
+
+  file.seekg(0, std::ios::end);
+  fileSize = file.tellg();
+  file.seekg(0, std::ios::beg);
+
+  // reserve capacity
+  std::vector<int> vec;
+  vec.reserve(fileSize);
+
+  // read the data:
+  vec.insert(vec.begin(),
+             std::istream_iterator<INT>(file),
+             std::istream_iterator<INT>());
+*/
+
+
+    for (int i = 0; i < vec.size(); i++) {
+        std::cout << vec[i] << '\n';
+    }
+
+}
+
 void archivoVendedor() {
     ofstream outfile;
     time_t currentTime = time(0);
@@ -115,7 +159,7 @@ int main(){
     cin>>opcion;
     switch (opcion) {
         case 1:{
-
+            leerBinario();
             break;
         }
         case 2:{
