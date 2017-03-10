@@ -67,5 +67,5 @@ void Consolas::setModelo(string modelo){
   this->modelo = modelo;
 }
 Consolas::~Consolas(){
-    cout<<"Destruyendo objeto consolas"<<endl;
+    //cout<<"Destruyendo objeto consolas"<<endl;
 }

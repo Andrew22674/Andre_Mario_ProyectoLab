@@ -37,8 +37,8 @@ void crearLogVenta(Venta*);
 void crearLogVendedor(UsuarioVendedor*, int, int);
 void addConsola(vector<Consolas*>, Consolas*);
 string getHora();
-void guardarConsolas(vector<Consolas*>);
-vector<Consolas*> leerConsolas();
+void guardarConsolas(vector<Consolas>);
+vector<Consolas> leerConsolas();
 
 string fmt(const std::string& fmt, ...) {
 
@@ -66,10 +66,12 @@ string fmt(const std::string& fmt, ...) {
 int main(){
 
   //cout << typeid(Microsoft).name() << endl;
+  //no se puede guardar los vectores asi no mas porque no se pueden guardar punteros de objetos porque cada vez que se corra el programa el objeto puede tener otra direccion en memoria
   vector<Consolas*> consolas;
   vector<UsuarioAdmin*> usuariosadmin;
   vector<Juegos*> videojuegos;
   ClaseAdmin* claseadmin = new ClaseAdmin();
+  vector<Consolas> consolas2;
   int opcion = 0;
   int dinerousuario = 0, articulosvendidos = 0;
 
@@ -77,7 +79,9 @@ int main(){
   cout << "Size de vector del archivo binario " << leerConsolas().size() << endl;
   //agregando objetos del archivo binario al vector de consolas
   for(int i =0; i < leerConsolas().size(); i++){
-    consolas.push_back(leerConsolas()[i]);
+    Consolas consola = leerConsolas()[i];
+    Consolas* consola_pointer = &consola;
+    consolas.push_back(consola_pointer);
   }
 
   cout << "Size de vector de consolas: " << consolas.size() << endl;
@@ -610,6 +614,8 @@ int main(){
 
 
               if(marca == "SONY"){
+                Consolas consola(numserie, precio, releasedate, estado, modelo);
+                consolas2.push_back(consola);
                 Consolas* sony = new Sony(numserie, precio, releasedate, estado, modelo);
                 consolas.push_back(sony);
               }else if(marca == "Microsoft"){
@@ -867,7 +873,7 @@ int main(){
 
 
   }
-  guardarConsolas(consolas);
+  guardarConsolas(consolas2);
 
   return 0;
 }
@@ -990,7 +996,7 @@ string getHora(){
 }
 
 
-void guardarConsolas(vector<Consolas*> consolas){
+void guardarConsolas(vector<Consolas> consolas){
     ofstream fout("./Binario/DataConsolas.bin", ios::out | ios::binary);
     //fout.open()
     //if (fout.is_open()) {
@@ -1012,8 +1018,8 @@ void guardarConsolas(vector<Consolas*> consolas){
 
 }
 
-vector<Consolas*> leerConsolas(){
-  vector<Consolas*> list2;
+vector<Consolas> leerConsolas(){
+  vector<Consolas> list2;
 
   ifstream is("./Binario/DataConsolas.bin", ios::binary);
       int size2;
