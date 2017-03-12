@@ -7,8 +7,8 @@
 #include <fstream>
 #include <sstream>
 #include <cstdlib>
-
 #include <typeinfo>
+
 #include "Consolas.h"
 #include "Juegos.h"
 #include "Sony.h"
@@ -31,13 +31,14 @@
 
 using namespace std;
 
+void coutTypeID(vector<Consolas*> consolas);
 bool validarNumSerie(vector<Consolas*>, int);
 bool numSerieJuegos(vector<Juegos*>, int);
 void crearLogVenta(Venta*);
 void crearLogVendedor(UsuarioVendedor*, int, int);
 void addConsola(vector<Consolas*>, Consolas*);
 string getHora();
-void guardarConsolas(vector<Consolas>);
+void guardarConsolas(const Consolas);
 vector<Consolas> leerConsolas();
 
 string fmt(const std::string& fmt, ...) {
@@ -76,7 +77,7 @@ int main(){
   int dinerousuario = 0, articulosvendidos = 0;
 
 
-  cout << "Size de vector del archivo binario " << leerConsolas().size() << endl;
+  /*cout << "Size de vector del archivo binario " << leerConsolas().size() << endl;
   //agregando objetos del archivo binario al vector de consolas
   for(int i =0; i < leerConsolas().size(); i++){
     Consolas consola = leerConsolas()[i];
@@ -84,7 +85,7 @@ int main(){
     consolas.push_back(consola_pointer);
   }
 
-  cout << "Size de vector de consolas: " << consolas.size() << endl;
+  cout << "Size de vector de consolas: " << consolas.size() << endl;*/
 
   usuariosadmin.push_back(new UsuarioAdmin("Andre", "andre123"));
 
@@ -357,11 +358,11 @@ int main(){
                 int index;
                 cin >> index;
 
-                string marca, releasedate, modelo, estado;
-                int numserie, op_marca;
+                string /*marca,*/ releasedate, modelo, estado;
+                int numserie/*,op_marca*/;
                 double precio;
 
-                cout << "Marca" << endl
+                /*cout << "Marca" << endl
                 << "1. Microsoft" << endl
                 << "2. Sony" << endl
                 << "3. Nintendo" << endl;
@@ -373,7 +374,7 @@ int main(){
                   marca = "SONY";
                 }else{
                   marca = "Nintendo";
-                }
+                }*/
 
                 cout << "Ingrese anio en que salio la consola" << endl;
                 cin >> releasedate;
@@ -392,15 +393,20 @@ int main(){
                   cin >> numserie;
                 }
 
+                consolas.at(index) -> SetNSerie(numserie);
+                consolas.at(index) -> SetPrecio(precio);
+                consolas.at(index) -> SetAnioSalida(releasedate);
+                consolas.at(index) -> setEstado(estado);
+                consolas.at(index) -> setModelo(modelo);
+                /*
                   if(marca == "SONY"){
                     consolas.at(index) = new Sony(numserie, precio, releasedate, estado, modelo);
                   }else if(marca == "Microsoft"){
                     consolas.at(index) = new Microsoft(numserie, precio, releasedate, estado, modelo);
                   }else{
                     consolas.at(index) = new Nintendo(numserie, precio, releasedate, estado, modelo);
-
                   }
-
+                  */
 
               }else if(mod_cons == 2){//modificar videojuegos
                 cout << "Ingrese indice de videojuego que desea modificar" << endl;
@@ -553,6 +559,7 @@ int main(){
       int opcionvendedor = 0;
 
       while (opcionvendedor != 3) {
+        //coutTypeID(consolas);
         cout << "Menu usuario vendedor" << endl
         << "1. Agregar consolas/videojuegos" << endl
         << "2. Vender" << endl
@@ -614,18 +621,18 @@ int main(){
 
 
               if(marca == "SONY"){
-                Consolas consola(numserie, precio, releasedate, estado, modelo);
-                consolas2.push_back(consola);
+                /*Consolas consola(numserie, precio, releasedate, estado, modelo);
+                consolas2.push_back(consola);*/
                 Consolas* sony = new Sony(numserie, precio, releasedate, estado, modelo);
                 consolas.push_back(sony);
               }else if(marca == "Microsoft"){
-                Microsoft* microsoft = new Microsoft(numserie, precio, releasedate, estado, modelo);
+                Consolas* microsoft = new Microsoft(numserie, precio, releasedate, estado, modelo);
                 consolas.push_back(microsoft);
-                static_cast<Microsoft*> (consolas.back());
+                //static_cast<Microsoft*> (consolas.back());
               }else{
-                Nintendo* nintendo = new Nintendo(numserie, precio, releasedate, estado, modelo);
+                Consolas* nintendo = new Nintendo(numserie, precio, releasedate, estado, modelo);
                 consolas.push_back(nintendo);
-                static_cast<Nintendo*> (consolas.back());
+                //static_cast<Nintendo*> (consolas.back());
               }
             contador++;
             }
@@ -873,7 +880,20 @@ int main(){
 
 
   }
-  guardarConsolas(consolas2);
+  //guardarConsolas(consolas2);
+
+  for(int i =0; i<consolas.size(); i++){
+    guardarConsolas(consolas[i]);
+  }
+
+  for(int i =0; i<consolas.size(); i++){
+    delete consolas[i];
+  }
+
+  for(int i =0; i<videojuegos.size(); i++){
+    delete videojuegos[i];
+  }
+
 
   return 0;
 }
@@ -921,10 +941,12 @@ void crearLogVenta(Venta* venta){
   tm* currentDate = localtime(&currentTime);
   char filename[256] = {0};
 
-  const int directorio = system("mkdir ./log_ventas");
-  if(directorio == -1){
+  try{
+    const int directorio = system("mkdir -p ./log_ventas");//-p es para crear directorio solo si no existe
+  } catch (...) {
 
   }
+
   strcpy(filename, "./log_ventas/");
   strcat(filename, fmt("%d:%d:%d_%d-%d-%d.log",
          currentDate->tm_hour, currentDate->tm_min, currentDate->tm_sec,
@@ -961,7 +983,12 @@ void crearLogVendedor(UsuarioVendedor* usuario, int cantidadarticulos, int diner
   char filename[256] = {0};
   time_t currentTime = time(0);
   tm* currentDate = localtime(&currentTime);
-  const int directorio = system("mkdir ./Usuarios_log");
+  try{
+    const int directorio = system("mkdir -p ./Usuarios_log");//-p es para crear directorio solo si no existe
+  } catch (...) {
+
+  }
+
   strcpy(filename, "./Usuarios_log/");
   strcat(filename, fmt("%s_%d-%d-%d.log",
          usuario -> getNombre().c_str(),
@@ -970,9 +997,9 @@ void crearLogVendedor(UsuarioVendedor* usuario, int cantidadarticulos, int diner
   stringstream ss;
 
   ss << "\t\tGameHub\n\nNombre: " << usuario -> getNombre() << "\nHora entrada: " << usuario -> getHoraEntrada() << "\nHora salida: "
-  << usuario -> getHoraSalida() << "\n\nCantidad de articulos vendidos: " << cantidadarticulos << "\nDinero generado: " << dinero << "\n\n";
+  << usuario -> getHoraSalida() << "\n\nCantidad de articulos vendidos: " << cantidadarticulos << "\nDinero generado: " << dinero << "\n-----------------------\n";
 
-  outfile.open(filename, std::ios::app);
+  outfile.open(filename, std::ios::app); //si no quiero append, solo le borro el std::ios::app
   outfile << ss.str();
   outfile.close();
 }
@@ -990,17 +1017,17 @@ string getHora(){
   int min = fechahora -> tm_min;
 
   stringstream ss;
+  //  std::cout << "Entre al if" << '\n';
   ss << hora << ":" << min;
 
   return ss.str();
 }
 
 
-void guardarConsolas(vector<Consolas> consolas){
+/*void guardarConsolas(vector<Consolas> consolas){
     ofstream fout("./Binario/DataConsolas.bin", ios::out | ios::binary);
     //fout.open()
     //if (fout.is_open()) {
-        std::cout << "Entre al if" << '\n';
         //while (!fout.eof()) {
             //std::cout << "Entre al while" << '\n';
             //std::cout << "Enteros size: "<< enteros.size() << '\n';
@@ -1012,11 +1039,11 @@ void guardarConsolas(vector<Consolas> consolas){
         //}
         //fout.flush();
         fout.close();
-        cout<<"copiado con exito"<<endl;
+        //cout<<"copiado con exito"<<endl;
     //}
 
 
-}
+}*/
 
 vector<Consolas> leerConsolas(){
   vector<Consolas> list2;
@@ -1038,4 +1065,28 @@ vector<Consolas> leerConsolas(){
       is.close();
 
       return list2;
+}
+
+void coutTypeID(vector<Consolas*> consolas){
+  for(int i = 0; i < consolas.size(); i++){
+    cout << typeid(consolas[i]).name() << endl;
+    cout << typeid(*consolas[i]).name() << endl;
+  }
+}
+
+
+void guardarConsolas(const Consolas &cons){
+    // make an archive
+    std::ofstream ofs("./Binario/DataConsolas.bin", std::ios::binary);
+    boost::archive::polymorphic_binary_oarchive archivo(ofs);
+    archivo << cons;
+}
+
+void leerConsolas(Consolas &cons)
+{
+    // open the archive
+    std::ifstream ifs("./Binario/DataConsolas.bin", std::ios::binary);
+    boost::archive::polymorphic_binary_iarchive archivo(ifs);
+
+    archivo >> cons;
 }

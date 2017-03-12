@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+//#include <boost/serialization/vector.hpp>
 
 using namespace std;
 
@@ -7,6 +8,19 @@ using namespace std;
 #define CONSOLAS_H
 
 class Consolas{
+
+  /*friend class boost::serialization::access;
+  friend std::ostream & operator<<(std::ostream &os, const Consolas &co);*/
+  /*template<class Archive>
+   void serialize(Archive &ar, const unsigned int version)
+   {
+       ar & nSere;
+       ar & precio;
+       ar & anioSalida;
+       ar & estado;
+       ar & modelo;
+   }*/
+
 protected:
   int nSerie;
   double precio;
@@ -47,5 +61,9 @@ public:
   ~Consolas();
 };
 
+std::ostream & operator<<(std::ostream &os, const Consolas &co)
+{
+    return os << co.nSerie << co.precio << ' ' << co.GetAnioSalida() << ' ' << co.getEstado() << ' ' co.getModelo();
+}
 
 #endif /* CONSOLAS_H */
