@@ -126,6 +126,8 @@ int main(){
 
 
 
+
+
   ifstream consolasbin("./Binario/DataConsolas.bin");
   if (consolasbin.good()){//si el archivo de consolas ya existe, leo los datos
     g_consolas consolasguardadas;
