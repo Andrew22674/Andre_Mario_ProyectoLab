@@ -1,5 +1,16 @@
 #include <string>
 
+#include <boost/serialization/vector.hpp>
+
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+
+#include <boost/archive/polymorphic_binary_iarchive.hpp>
+#include <boost/archive/polymorphic_binary_oarchive.hpp>
+
+#include <boost/serialization/base_object.hpp>
+
+
 using namespace std;
 
 
@@ -7,7 +18,21 @@ using namespace std;
 #define JUEGOS_H
 
 class Juegos{
-protected:
+  friend class boost::serialization::access;
+
+  template<class Archive>
+   void serialize(Archive &ar, const unsigned int version)
+   {
+       ar & nombre;
+       ar & anio;
+       ar & consola;
+       ar & numJug;
+       ar & genero;
+       ar & estado;
+       ar & nSerie;
+       ar & precio;
+   }
+private:
     string nombre;
     int anio;
     string consola;

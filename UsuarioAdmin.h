@@ -15,6 +15,8 @@ public:
   string getContrasena();
   void setContrasena(string);
 
+  virtual ~UsuarioAdmin();
+
 private:
   string nombre;
   string contrasena;

@@ -1,3 +1,4 @@
+//usuario admin nombre: Usuario contrasena: usuario123
 #include <iostream>
 #include <string>
 #include <vector>
@@ -8,15 +9,16 @@
 #include <sstream>
 #include <cstdlib>
 #include <typeinfo>
-
+#include <sys/stat.h>
 #include "Consolas.h"
 #include "Juegos.h"
 #include "Sony.h"
 #include "Microsoft.h"
 #include "Nintendo.h"
+
 #include "Bandai.h"
 #include "Bugisoft.h"
-#include "EA.h"
+#include "ElectronicArts.h"
 #include "JuegosMicrosoft.h"
 #include "JuegosNintendo.h"
 #include "JuegosSony.h"
@@ -26,11 +28,59 @@
 #include "UsuarioVendedor.h"
 #include "UsuarioAdmin.h"
 #include "Venta.h"
-#include "ClaseAdmin.h"
+#include "g_consolas.h"
+#include "g_juegos.h"
 
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/serialization/binary_object.hpp>
+#include <boost/archive/polymorphic_binary_iarchive.hpp>
+#include <boost/archive/polymorphic_binary_oarchive.hpp>
+
+
+//guardar y leer consolas de archivos binarios
+void guardarConsolas(const g_consolas &cons){
+
+
+    std::ofstream ofs("./Binario/DataConsolas.bin", /*std::ios::app &*/ std::ios::binary);
+    boost::archive::polymorphic_binary_oarchive archivo(ofs);
+    archivo << cons;
+
+
+}
+
+
+void leerConsolas(g_consolas &s)
+{
+
+    std::ifstream ifs("./Binario/DataConsolas.bin", std::ios::binary);
+    boost::archive::polymorphic_binary_iarchive archivo(ifs);
+
+    archivo >> s;
+}
+
+void guardarJuegos(const g_juegos &jueg){
+
+
+    std::ofstream ofs("./Binario/DataJuegos.bin", /*std::ios::app &*/ std::ios::binary);
+    boost::archive::polymorphic_binary_oarchive archivo(ofs);
+    archivo << jueg;
+
+
+}
+
+void leerJuegos(g_juegos &jueg)
+{
+
+    std::ifstream ifs("./Binario/DataJuegos.bin", std::ios::binary);
+    boost::archive::polymorphic_binary_iarchive archivo(ifs);
+
+    archivo >> jueg;
+}
 
 using namespace std;
 
+//prototipos
 void coutTypeID(vector<Consolas*> consolas);
 bool validarNumSerie(vector<Consolas*>, int);
 bool numSerieJuegos(vector<Juegos*>, int);
@@ -38,9 +88,9 @@ void crearLogVenta(Venta*);
 void crearLogVendedor(UsuarioVendedor*, int, int);
 void addConsola(vector<Consolas*>, Consolas*);
 string getHora();
-void guardarConsolas(const Consolas);
-vector<Consolas> leerConsolas();
 
+
+//funcion para dar formato
 string fmt(const std::string& fmt, ...) {
 
     int size = 200;
@@ -65,29 +115,139 @@ string fmt(const std::string& fmt, ...) {
 
 
 int main(){
-
-  //cout << typeid(Microsoft).name() << endl;
-  //no se puede guardar los vectores asi no mas porque no se pueden guardar punteros de objetos porque cada vez que se corra el programa el objeto puede tener otra direccion en memoria
   vector<Consolas*> consolas;
   vector<UsuarioAdmin*> usuariosadmin;
   vector<Juegos*> videojuegos;
-  ClaseAdmin* claseadmin = new ClaseAdmin();
-  vector<Consolas> consolas2;
+  UsuarioAdmin* usuarioadmin = new UsuarioAdmin("user", "user123");////////////////////////////////////////// Usuario nombre y contrasena /////////////////////////////////////////////////////////////////////////////////////////////
+  g_consolas consolasb;
+  g_juegos juegosbin;
   int opcion = 0;
   int dinerousuario = 0, articulosvendidos = 0;
 
 
-  /*cout << "Size de vector del archivo binario " << leerConsolas().size() << endl;
-  //agregando objetos del archivo binario al vector de consolas
-  for(int i =0; i < leerConsolas().size(); i++){
-    Consolas consola = leerConsolas()[i];
-    Consolas* consola_pointer = &consola;
-    consolas.push_back(consola_pointer);
+
+  ifstream consolasbin("./Binario/DataConsolas.bin");
+  if (consolasbin.good()){//si el archivo de consolas ya existe, leo los datos
+    g_consolas consolasguardadas;
+    leerConsolas(consolasguardadas);
+
+    //cout << "Consolas de archivo binario: " << endl;
+
+    for(int i = 0; i < consolasguardadas.sizeVector(); i++){
+      /*cout << "Consola " << i << endl;
+      cout << "Type id " << typeid(*consolasguardadas.getConsola(i)).name() << endl;
+      cout << "Modelo: " << consolasguardadas.getConsola(i) -> getModelo() << endl;
+      cout << "Numero de serie: " << consolasguardadas.getConsola(i) -> GetNSerie() << endl;
+      cout << "Precio: " << consolasguardadas.getConsola(i) -> GetPrecio() << endl;
+      cout << "Release date: " << consolasguardadas.getConsola(i) -> GetAnioSalida() << endl;
+      cout << "Estado: " << consolasguardadas.getConsola(i) -> getEstado() << endl;*/
+
+      int numserie = consolasguardadas.getConsola(i) -> GetNSerie();
+      double precio = consolasguardadas.getConsola(i) -> GetPrecio();
+      string anio = consolasguardadas.getConsola(i) -> GetAnioSalida();
+      string estado = consolasguardadas.getConsola(i) -> getEstado();
+      string modelo = consolasguardadas.getConsola(i) -> getModelo();
+
+
+      if(typeid(*consolasguardadas.getConsola(i)).name() == typeid(Microsoft).name()){
+        Consolas* consola = new Microsoft(numserie, precio, anio, estado, modelo);
+        consolas.push_back(consola);
+      }else if(typeid(*consolasguardadas.getConsola(i)).name() == typeid(Sony).name()){
+        Consolas* consola = new Sony(numserie, precio, anio, estado, modelo);
+        consolas.push_back(consola);
+      }else if(typeid(*consolasguardadas.getConsola(i)).name() == typeid(Nintendo).name()){
+        Consolas* consola = new Nintendo(numserie, precio, anio, estado, modelo);
+        consolas.push_back(consola);
+      }
+
+
+    }
+    //cout << "Existe" << endl;
+
+    //cout << consolas2.size() << endl;
+  }else{
+    //cout << "No existe" << endl;
   }
 
-  cout << "Size de vector de consolas: " << consolas.size() << endl;*/
+  ifstream juegbin("./Binario/DataJuegos.bin");
+  if (juegbin.good()){//si el archivo de juegos ya existe, leo los datos
+    g_juegos juegosguardados;
+    leerJuegos(juegosguardados);
 
-  usuariosadmin.push_back(new UsuarioAdmin("Andre", "andre123"));
+    //cout << endl << "Juegos de archivo binario: " << endl << endl;
+
+    for(int i = 0; i < juegosguardados.sizeVector(); i++){
+      /*cout << "Numero de serie: " << juegosguardados.getJuego(i) -> GetNSerie() << endl;
+      cout << "Nombre: " << juegosguardados.getJuego(i) -> GetNombre() << endl;
+      cout << "Precio: " << juegosguardados.getJuego(i) -> GetPrecio() << endl;
+      cout << "Anio: " << juegosguardados.getJuego(i) -> GetAnio() << endl;
+      cout << "Consola: " << juegosguardados.getJuego(i) -> GetConsola() << endl;
+      cout << "Max. numero de jugadores: " << juegosguardados.getJuego(i) -> GetNumJug() << endl;
+      cout << "Genero: " << juegosguardados.getJuego(i) -> GetGenero() << endl;
+      cout << "Estado: " << juegosguardados.getJuego(i) -> GetEstado() << endl;*/
+
+      string nombre = juegosguardados.getJuego(i) -> GetNombre();
+      int anio = juegosguardados.getJuego(i) -> GetAnio();
+      string consola = juegosguardados.getJuego(i) -> GetConsola();
+      int jugadores = juegosguardados.getJuego(i) -> GetNumJug();
+      string genero = juegosguardados.getJuego(i) -> GetGenero();
+      string estado = juegosguardados.getJuego(i) -> GetEstado();
+      int nserie = juegosguardados.getJuego(i) -> GetNSerie();
+      double precio = juegosguardados.getJuego(i) -> GetPrecio();
+
+
+      if(typeid(*juegosguardados.getJuego(i)).name() == typeid(Bandai).name()){
+        Juegos* juego = new Bandai(nombre, anio, consola, jugadores, genero, estado, nserie, precio);
+        videojuegos.push_back(juego);
+      }else if(typeid(*juegosguardados.getJuego(i)).name() == typeid(Bugisoft).name()){
+        Juegos* juego = new Bugisoft(nombre, anio, consola, jugadores, genero, estado, nserie, precio);
+        videojuegos.push_back(juego);
+      }else if(typeid(*juegosguardados.getJuego(i)).name() == typeid(ElectronicArts).name()){
+        Juegos* juego = new ElectronicArts(nombre, anio, consola, jugadores, genero, estado, nserie, precio);
+        videojuegos.push_back(juego);
+      }else if(typeid(*juegosguardados.getJuego(i)).name() == typeid(JuegosMicrosoft).name()){
+        Juegos* juego = new JuegosMicrosoft(nombre, anio, consola, jugadores, genero, estado, nserie, precio);
+        videojuegos.push_back(juego);
+      }else if(typeid(*juegosguardados.getJuego(i)).name() == typeid(JuegosNintendo).name()){
+        Juegos* juego = new JuegosNintendo(nombre, anio, consola, jugadores, genero, estado, nserie, precio);
+        videojuegos.push_back(juego);
+      }else if(typeid(*juegosguardados.getJuego(i)).name() == typeid(JuegosSony).name()){
+        Juegos* juego = new JuegosSony(nombre, anio, consola, jugadores, genero, estado, nserie, precio);
+        videojuegos.push_back(juego);
+      }else if(typeid(*juegosguardados.getJuego(i)).name() == typeid(Konami).name()){
+        Juegos* juego = new Konami(nombre, anio, consola, jugadores, genero, estado, nserie, precio);
+        videojuegos.push_back(juego);
+      }else if(typeid(*juegosguardados.getJuego(i)).name() == typeid(Sega).name()){
+        Juegos* juego = new Sega(nombre, anio, consola, jugadores, genero, estado, nserie, precio);
+        videojuegos.push_back(juego);
+      }else if(typeid(*juegosguardados.getJuego(i)).name() == typeid(SquareEnix).name()){
+        Juegos* juego = new SquareEnix(nombre, anio, consola, jugadores, genero, estado, nserie, precio);
+        videojuegos.push_back(juego);
+      }
+
+
+    }
+
+
+
+
+
+    cout << endl;
+
+
+  }
+
+
+  /*for(int i = 0; i < consolas.size(); i++){
+    cout << endl << "Consola " << i+1 << endl<< endl;
+    cout << "Type id: " << typeid(*consolas[i]).name() << endl;
+    cout << "Numero de serie: " << consolas[i] -> GetNSerie() << endl;
+    cout << "Modelo: " << consolas[i] -> getModelo() << endl;
+    cout << "Precio: " << consolas[i] -> GetPrecio() << endl;
+    cout << "Estado: " << consolas[i] -> getEstado() << endl;
+    cout << "Release date: " << consolas[i] -> GetAnioSalida() << endl;
+  }*/
+
 
   //objetos de usuario para ingresar al sistema
 
@@ -115,6 +275,10 @@ int main(){
         if(usuario == usuariosadmin[i] -> getNombre() &&  contrasena == usuariosadmin[i] -> getContrasena()){
           usuarioingreso = true;
         }
+      }
+
+      if(usuario == usuarioadmin -> getNombre() && contrasena == usuarioadmin -> getContrasena()){
+        usuarioingreso = true;
       }
 
       if(usuarioingreso == true /*y que sea instancia de usuario administrador*/ ){
@@ -316,7 +480,7 @@ int main(){
                 }else if(compania == "Square Enix"){
                   videojuegos.push_back(new SquareEnix(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
                 }if(compania == "EA"){
-                  videojuegos.push_back(new EA(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
+                  videojuegos.push_back(new ElectronicArts(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
                 }else if(compania == "SEGA"){
                   videojuegos.push_back(new Sega(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
                 }else if(compania == "Ubisoft"){
@@ -661,6 +825,47 @@ int main(){
             cout << "Ingrese precio" << endl;
             cin >> precio;
 
+            cout << "Ingrese compania de videojuego" << endl;
+
+            cout << "1. Microsoft" << endl <<
+            "2. Sony" << endl <<
+            "3. Nintendo" << endl <<
+            "4. Bandai" << endl <<
+            "5. Konami" << endl <<
+            "6. Square Enix" << endl <<
+            "7. EA" << endl <<
+            "8. SEGA" << endl <<
+            "9. Ubisoft" << endl;
+
+            int opc_compania;
+            cin >> opc_compania;
+
+            while(opc_compania < 0 || opc_compania > 9){
+              cout << "Numero invalido, ingrese otro numero" << endl;
+              cin >> opc_compania;
+
+            }
+            string compania;
+            if(opc_compania == 1){
+              compania = "Microsoft";
+            }else if(opc_compania == 2){
+              compania = "Sony";
+            }else if(opc_compania == 3){
+              compania = "Nintendo";
+            }else if(opc_compania == 4){
+              compania = "Bandai";
+            }else if(opc_compania == 5){
+              compania = "Konami";
+            }else if(opc_compania == 6){
+              compania = "Square Enix";
+            }else if(opc_compania == 7){
+              compania = "EA";
+            }else if(opc_compania == 8){
+              compania = "SEGA";
+            }else if(opc_compania == 9){
+              compania = "Ubisoft";
+            }
+
             cout << "Ingrese numero de serie" << endl;
             cin >> numserie;
 
@@ -671,8 +876,27 @@ int main(){
 
             }
 
-            Juegos* vj = new Juegos(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio);
-            videojuegos.push_back(vj);
+            if(compania == "Microsoft"){
+              videojuegos.push_back(new JuegosMicrosoft(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
+            }else if(compania == "Sony"){
+              videojuegos.push_back(new JuegosSony(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
+            }else if(compania == "Nintendo"){
+              videojuegos.push_back(new JuegosNintendo(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
+            }else if(compania == "Bandai"){
+              videojuegos.push_back(new Bandai(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
+            }else if(compania == "Konami"){
+              videojuegos.push_back(new Konami(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
+            }else if(compania == "Square Enix"){
+              videojuegos.push_back(new SquareEnix(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
+            }if(compania == "EA"){
+              videojuegos.push_back(new ElectronicArts(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
+            }else if(compania == "SEGA"){
+              videojuegos.push_back(new Sega(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
+            }else if(compania == "Ubisoft"){
+              videojuegos.push_back(new Bugisoft(nombre,releasedate, consola, jugadores, genero, estado, numserie, precio));
+            }
+
+
 
 
           }else{
@@ -821,7 +1045,7 @@ int main(){
                   }
                 }else if(opc_vid == 7){
                   for(int i = 0; i<videojuegos.size(); i++){
-                    if(typeid(*videojuegos[i]).name() == typeid(EA).name()){
+                    if(typeid(*videojuegos[i]).name() == typeid(ElectronicArts).name()){
                       cout << i << " " << videojuegos[i] -> GetNombre() << endl;
                     }
                   }
@@ -880,11 +1104,25 @@ int main(){
 
 
   }
-  //guardarConsolas(consolas2);
 
-  for(int i =0; i<consolas.size(); i++){
-    guardarConsolas(consolas[i]);
+  for(int i = 0; i < consolas.size(); i++){
+    consolasb.addConsola(consolas[i]);
   }
+  //guardar Consolas en archivo binario
+  guardarConsolas(consolasb);
+
+
+  for(int i = 0; i < videojuegos.size(); i++){
+    juegosbin.addJuego(videojuegos[i]);
+  }
+
+  //guardar juegos en archivo binario
+  guardarJuegos(juegosbin);
+
+  //guardar juegos en archivo binario
+  /*for(int i =0; i<consolas.size(); i++){
+    guardarConsolas(*consolas[i]);
+  }*/
 
   for(int i =0; i<consolas.size(); i++){
     delete consolas[i];
@@ -897,6 +1135,7 @@ int main(){
 
   return 0;
 }
+
 
 
 
@@ -1045,7 +1284,7 @@ string getHora(){
 
 }*/
 
-vector<Consolas> leerConsolas(){
+/*vector<Consolas> leerConsolas(){
   vector<Consolas> list2;
 
   ifstream is("./Binario/DataConsolas.bin", ios::binary);
@@ -1057,36 +1296,19 @@ vector<Consolas> leerConsolas(){
       is.read((char*)&list2[0], size2 * sizeof(list2));
 
       //std::cout << "Size del vector: " << list2.size() <<endl;
-      /*for (int i = 0; i < list2.size(); i++) {
+      for (int i = 0; i < list2.size(); i++) {
           std::cout << i << ". " << list2[i] << '\n';
 
-      }*/
+      }
       //std::cout << "Antes de cerrar" << '\n';
       is.close();
 
       return list2;
-}
+}*/
 
 void coutTypeID(vector<Consolas*> consolas){
   for(int i = 0; i < consolas.size(); i++){
     cout << typeid(consolas[i]).name() << endl;
     cout << typeid(*consolas[i]).name() << endl;
   }
-}
-
-
-void guardarConsolas(const Consolas &cons){
-    // make an archive
-    std::ofstream ofs("./Binario/DataConsolas.bin", std::ios::binary);
-    boost::archive::polymorphic_binary_oarchive archivo(ofs);
-    archivo << cons;
-}
-
-void leerConsolas(Consolas &cons)
-{
-    // open the archive
-    std::ifstream ifs("./Binario/DataConsolas.bin", std::ios::binary);
-    boost::archive::polymorphic_binary_iarchive archivo(ifs);
-
-    archivo >> cons;
 }

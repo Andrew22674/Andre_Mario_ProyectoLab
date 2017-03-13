@@ -1,6 +1,15 @@
 #include <iostream>
 #include <string>
-//#include <boost/serialization/vector.hpp>
+#include <boost/serialization/vector.hpp>
+
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+
+#include <boost/archive/polymorphic_binary_iarchive.hpp>
+#include <boost/archive/polymorphic_binary_oarchive.hpp>
+
+#include <boost/serialization/base_object.hpp>
+
 
 using namespace std;
 
@@ -9,25 +18,23 @@ using namespace std;
 
 class Consolas{
 
-  /*friend class boost::serialization::access;
-  friend std::ostream & operator<<(std::ostream &os, const Consolas &co);*/
-  /*template<class Archive>
+  friend class boost::serialization::access;
+
+  template<class Archive>
    void serialize(Archive &ar, const unsigned int version)
    {
-       ar & nSere;
+       ar & nSerie;
        ar & precio;
        ar & anioSalida;
        ar & estado;
        ar & modelo;
-   }*/
-
-protected:
-  int nSerie;
-  double precio;
-  string anioSalida;
-  string estado;
-  string modelo;
-
+   }
+private:
+    int nSerie;
+    double precio;
+    string anioSalida;
+    string estado;
+    string modelo;
 public:
   Consolas();
 
@@ -57,13 +64,15 @@ public:
 
   virtual void setModelo(string);
 
+  friend std::ostream & operator<<(std::ostream &os, Consolas &co)
+  {
+      return os << co.GetNSerie() << co.GetPrecio() << ' ' << co.GetAnioSalida() << ' ' << co.getEstado() << ' ' << co.getModelo();
+  }
+
 
   ~Consolas();
 };
 
-std::ostream & operator<<(std::ostream &os, const Consolas &co)
-{
-    return os << co.nSerie << co.precio << ' ' << co.GetAnioSalida() << ' ' << co.getEstado() << ' ' co.getModelo();
-}
+
 
 #endif /* CONSOLAS_H */

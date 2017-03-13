@@ -19,3 +19,7 @@ string Microsoft::getNombre(){
     return nombre;
 }
 */
+
+Microsoft::~Microsoft(){
+  
+}

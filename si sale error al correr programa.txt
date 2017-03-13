@@ -1,0 +1,8 @@
+
+error cuando no encuentra libboost.0 :
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/path/de/libboost.o
+
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/av/Documents/Boost/boost_1_63_0/stage/lib/
+

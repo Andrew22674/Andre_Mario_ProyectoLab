@@ -18,3 +18,7 @@ string Nintendo::getNombre(){
     return nombre;
 }
 */
+
+Nintendo::~Nintendo(){
+  
+}

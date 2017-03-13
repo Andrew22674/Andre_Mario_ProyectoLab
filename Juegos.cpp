@@ -84,5 +84,5 @@ void Juegos::SetPrecio(double precio) {
 }
 
 Juegos::~Juegos(){
-	cout<<"Destruyendo objeto Juegos"<<endl;
+	//cout<<"Destruyendo objeto Juegos"<<endl;
 }

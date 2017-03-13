@@ -27,3 +27,8 @@ string UsuarioAdmin::getContrasena(){
 void UsuarioAdmin::setContrasena(string contrasena){
   this -> contrasena = contrasena;
 }
+
+
+UsuarioAdmin::~UsuarioAdmin(){
+  
+}

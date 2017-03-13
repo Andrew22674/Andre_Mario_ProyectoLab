@@ -17,3 +17,7 @@ string Sony::getNombre(){
     return nombre;
 }
 */
+
+Sony::~Sony(){
+  
+}
